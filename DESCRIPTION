@@ -22,7 +22,8 @@ Suggests:
     ggplot2,
     plyr,
     igraph,
-    methods 
+    methods,
+    latex2exp 
 Depends: R (>= 3.4)
 biocViews:GeneRegulation,Network,SystemsBiology,GeneExpression,Transcription,GenePrediction
 VignetteBuilder: knitr
