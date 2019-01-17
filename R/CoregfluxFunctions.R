@@ -450,6 +450,7 @@ PrepareTrainDataInf<-function(network,
 #' data("SC_experiment_influence")
 #' data("SC_EXP_DATA")
 #' data("iMM904")
+#' data("aliases_SC")
 #' PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
 #'                     experiment_influence = SC_experiment_influence,
 #'                     train_expression = SC_EXP_DATA,
