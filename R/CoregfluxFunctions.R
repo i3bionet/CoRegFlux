@@ -454,7 +454,8 @@ PrepareTrainDataInf<-function(network,
 #'                     experiment_influence = SC_experiment_influence,
 #'                     train_expression = SC_EXP_DATA,
 #'                     min_Target = 4,
-#'                     model = iMM904)
+#'                     model = iMM904,
+#'                     aliases= aliases_SC)
 #'
 #' GeneState<-data.frame("Name"=names(PredictedGeneState),
 #'                     "State"=unname(PredictedGeneState))
@@ -471,7 +472,7 @@ predict_linear_model_influence <- function(network,
                                            min_Target = 10,
                                            tol = 1e-10,
                                            #linear_model = NULL,
-                                           aliases=NULL,
+                                           aliases = NULL,
                                            verbose = 0) {
     # see if there is an available linear model to predict gene expression
     #if (!is.null(linear_model)) {
