@@ -27,6 +27,9 @@ library(CoRegFlux)
 library(CoRegNet)
 library(sybil)
 library(latex2exp)
+
+SYBIL_SETTINGS("SOLVER", "lpSolveAPI", loadPackage = FALSE)
+
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
 
@@ -70,6 +73,7 @@ To use *all* CoRegFlux features you will need:
 
 
 
+
 # Quick user guide
 
 ## Computing Influence using _CoRegNet_ package function 
@@ -104,6 +108,9 @@ GeneState<-data.frame("Name" = names(PredictedGeneState),
 # 16.6 mmol ± =  3g/L Glucose
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
+# Set your favorite solve in sybil using the command
+# SYBIL_SETTINGS("SOLVER", "lpSolveAPI", loadPackage = FALSE)
+# See sybil documentation for more information on available solvers
 
 Simulation1<-Simulation(model = iMM904,
                         time = seq(1,20,by = 1),
