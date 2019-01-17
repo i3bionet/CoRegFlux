@@ -11,6 +11,9 @@ data("SC_GRN_1")
 data("SC_EXP_DATA")
 data("aliases_SC")
 
+metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
+                        "concentrations" = c(16.6,0))
+
 testthat::test_that("Simulation without CoRegNet finishes ", {
     browser()
     expect_type( Simulation(model = iMM904,

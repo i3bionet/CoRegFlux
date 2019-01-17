@@ -1,7 +1,7 @@
 Package: CoRegFlux
 Type: Package
 Title: CoRegFlux
-Version: 0.99.1
+Version: 0.99.2
 Author: Pauline Trébulle, Daniel Trejo-Banos, Mohamed Elati
 Maintainer: Pauline Trébulle and Mohamed Elati <coregflux@gmail.com>
 Description: CoRegFlux aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working.
@@ -10,10 +10,10 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     CoRegNet,
+    glpkAPI,
     sybil
 RoxygenNote: 6.1.1
-Suggests: 
-    glpkAPI,
+Suggests:
     testthat,
     knitr,
     rmarkdown,
@@ -24,6 +24,5 @@ Suggests:
     igraph,
     methods,
     latex2exp 
-Depends: R (>= 3.4)
 biocViews:GeneRegulation,Network,SystemsBiology,GeneExpression,Transcription,GenePrediction
 VignetteBuilder: knitr
