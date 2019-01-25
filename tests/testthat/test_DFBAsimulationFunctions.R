@@ -15,10 +15,9 @@ metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
 
 testthat::test_that("Simulation without CoRegNet finishes ", {
-    browser()
     expect_type( Simulation(model = iMM904,
                             metabolites = metabolites,
-                            time = 1:12,
+                            time = 1:5,
                             initial_biomass  = 0.4),type = "list" )
 
 })
@@ -27,12 +26,12 @@ testthat::test_that("Simulation without CoRegNet throw errors for missing
                     arguments ", {
     expect_error( Simulation(model = iMM904,
                              metabolites = metabolites,
-                             time = 1:12))
+                             time = 1:5))
     expect_error( Simulation(initial_biomass  = 0.4,
                              metabolites = metabolites,
-                             time = 1:12))
+                             time = 1:5))
     expect_error( Simulation(model = iMM904,
-                             time = 1:12,
+                             time = 1:5,
                              initial_biomass  = 0.4))
 
 })
@@ -69,30 +68,30 @@ testthat::test_that("Simulation without CoRegNet throw errors for missing
 
 
 
-PredictedGeneState <- predict_linear_model_influence(model = iMM904,
-                                                 min_Target = 4,
-                                                 aliases = aliases_SC,
-                                                 train_expression = SC_EXP_DATA,
-                                                 experiment_influence =
-                                                     SC_experiment_influence,
-                                                 network = SC_GRN_1)
+# PredictedGeneState <- predict_linear_model_influence(model = iMM904,
+#                                                  min_Target = 4,
+#                                                  aliases = aliases_SC,
+#                                                  train_expression = SC_EXP_DATA,
+#                                                  experiment_influence =
+#                                                      SC_experiment_influence,
+#                                                  network = SC_GRN_1)
 
-testthat::test_that("coregflux_static: check bounds are changed",{
-    model_gene_constraints <- coregflux_static(model= iMM904,
-                                               predicted_gene_expression =
-                                                   PredictedGeneState,
-                                               aliases = aliases_SC)$model
-    expect_false(all(model_gene_constraints@lowbnd == iMM904@lowbnd))
-    expect_false(all(model_gene_constraints@uppbnd == iMM904@uppbnd))
-})
+# testthat::test_that("coregflux_static: check bounds are changed",{
+#     model_gene_constraints <- coregflux_static(model= iMM904,
+#                                                predicted_gene_expression =
+#                                                    PredictedGeneState,
+#                                                aliases = aliases_SC)$model
+#     expect_false(all(model_gene_constraints@lowbnd == iMM904@lowbnd))
+#     expect_false(all(model_gene_constraints@uppbnd == iMM904@uppbnd))
+# })
 
 regulator_table <- data.frame("regulator" = "MET32",
                               "influence" =  -1.20322,
                               "expression" = 0,
                               stringsAsFactors = FALSE)
 
-testthat::test_that("model_TF_KO_OV_constraints: check bounds are changed for the
-          regulator targets",{
+testthat::test_that("model_TF_KO_OV_constraints: check bounds are changed for
+the regulator targets",{
               model_TF_KO_OV_constraints <-
                   update_fluxes_constraints_influence(model= iMM904,
                                                       coregnet = SC_GRN_1,
