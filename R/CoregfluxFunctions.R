@@ -108,12 +108,7 @@ continuous_gpr <- function(model, expression, scale = FALSE) {
 #' data("SC_EXP_DATA")
 #' data("aliases_SC")
 #' data(iMM904)
-#' PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
-#'                     experiment_influence = SC_experiment_influence,
-#'                     train_expression = SC_EXP_DATA,
-#'                     min_Target = 4,
-#'                     model = iMM904,
-#'                     aliases = aliases_SC)
+#' data(PredictedGeneState)
 #' static_list<-coregflux_static(iMM904,PredictedGeneState)
 
 coregflux_static <- function(model,

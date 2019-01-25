@@ -10,6 +10,7 @@ data("SC_experiment_influence")
 data("SC_GRN_1")
 data("SC_EXP_DATA")
 data("aliases_SC")
+data("PredictedGeneState")
 
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
@@ -66,24 +67,14 @@ testthat::test_that("Simulation without CoRegNet throw errors for missing
                }
  )
 
-
-
-# PredictedGeneState <- predict_linear_model_influence(model = iMM904,
-#                                                  min_Target = 4,
-#                                                  aliases = aliases_SC,
-#                                                  train_expression = SC_EXP_DATA,
-#                                                  experiment_influence =
-#                                                      SC_experiment_influence,
-#                                                  network = SC_GRN_1)
-
-# testthat::test_that("coregflux_static: check bounds are changed",{
-#     model_gene_constraints <- coregflux_static(model= iMM904,
-#                                                predicted_gene_expression =
-#                                                    PredictedGeneState,
-#                                                aliases = aliases_SC)$model
-#     expect_false(all(model_gene_constraints@lowbnd == iMM904@lowbnd))
-#     expect_false(all(model_gene_constraints@uppbnd == iMM904@uppbnd))
-# })
+testthat::test_that("coregflux_static: check bounds are changed",{
+     model_gene_constraints <- coregflux_static(model= iMM904,
+                                                predicted_gene_expression =
+                                                    PredictedGeneState,
+                                                aliases = aliases_SC)$model
+     expect_false(all(model_gene_constraints@lowbnd == iMM904@lowbnd))
+     expect_false(all(model_gene_constraints@uppbnd == iMM904@uppbnd))
+})
 
 regulator_table <- data.frame("regulator" = "MET32",
                               "influence" =  -1.20322,

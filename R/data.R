@@ -43,3 +43,9 @@
 #' @format a modelOrg object as required by sybil. See sybilSBML for more
 #' information on how to load other model.
 "iMM904"
+
+#' PredictedGeneState
+#' Predicted gene state as obtained by the function
+#' predict_linear_model_influence
+#' @format a named vector
+"PredictedGeneState"
