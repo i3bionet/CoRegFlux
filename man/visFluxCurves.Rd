@@ -21,15 +21,7 @@ a plot of the curves of the chosen fluxes
 Visualize Fluxes Curves
 }
 \examples{
-ODs<-seq.int(0.099,1.8,length.out = 5)
-times = seq(0.5,2,by=0.5)
-
-metabolites_rates <- data.frame("name"=c("D-Glucose"),
-"concentrations"=c(16.6),"rates"=c(-2.81))
-
-ODtoflux<-ODCurveToFluxCurves(model = iMM904,
-ODs = ODs,times = times, metabolites_rates = metabolites_rates)
-
+data("ODtoflux")
 visFluxCurves(ODtoflux,genes ="ADK3")
 }
 \seealso{

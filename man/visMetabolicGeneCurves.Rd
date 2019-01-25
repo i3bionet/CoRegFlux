@@ -22,14 +22,7 @@ a plot of the curves of the chosen metabolic genes
 Visualize Metabolic Gene Curves
 }
 \examples{
-ODs<-seq.int(0.099,1.8,length.out = 5)
-times = seq(0.5,2,by=0.5)
-metabolites_rates <- data.frame("name"=c("D-Glucose"),
-"concentrations"=c(16.6),"rates"=c(-2.81))
-
-ODcurveToMetCurve<- ODCurveToMetabolicGeneCurves(times = times,
-ODs = ODs,model = iMM904,aliases = aliases_SC,
-metabolites_rates = metabolites_rates)
+data("ODcurveToMetCurve")
 
 visMetabolicGeneCurves(ODcurveToMetCurve,genes="YJR077C")
 }

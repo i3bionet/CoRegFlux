@@ -462,14 +462,7 @@ GPRCurvesToMetabolicGeneCurves <- function(model,
 #' @param ... Optional others curves
 #' @export
 #' @examples
-#' ODs<-seq.int(0.099,1.8,length.out = 5)
-#' times = seq(0.5,2,by=0.5)
-#'metabolites_rates <- data.frame("name"=c("D-Glucose"),
-#' "concentrations"=c(16.6),"rates"=c(-2.81))
-#'
-#' ODcurveToMetCurve<- ODCurveToMetabolicGeneCurves(times = times,
-#' ODs = ODs,model = iMM904,aliases = aliases_SC,
-#' metabolites_rates = metabolites_rates)
+#' data("ODcurveToMetCurve")
 #'
 #' visMetabolicGeneCurves(ODcurveToMetCurve,genes="YJR077C")
 #' @seealso  ODCurveToMetabolicGeneCurves,ODCurveToFluxCurves, visFluxCurves
@@ -510,15 +503,7 @@ visMetabolicGeneCurves <- function(metabCurves,
 #' @param ... Optional others curves
 #' @export
 #' @examples
-#' ODs<-seq.int(0.099,1.8,length.out = 5)
-#' times = seq(0.5,2,by=0.5)
-#'
-#' metabolites_rates <- data.frame("name"=c("D-Glucose"),
-#' "concentrations"=c(16.6),"rates"=c(-2.81))
-#'
-#' ODtoflux<-ODCurveToFluxCurves(model = iMM904,
-#' ODs = ODs,times = times, metabolites_rates = metabolites_rates)
-#'
+#' data("ODtoflux")
 #' visFluxCurves(ODtoflux,genes ="ADK3")
 #' @seealso  ODCurveToFluxCurves, ODCurveToMetabolicGeneCurves,
 #' visMetabolicGeneCurves

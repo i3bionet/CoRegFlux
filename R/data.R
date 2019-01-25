@@ -49,3 +49,13 @@
 #' predict_linear_model_influence
 #' @format a named vector
 "PredictedGeneState"
+
+#' ODcurveToMetCurve
+#' List as obtained by the function ODcurveToMetCurve
+#' @format List as obtained by the function ODcurveToMetCurve
+"ODcurveToMetCurve"
+
+#' ODtoflux
+#' List as obtained by the function ODCurveToFluxCurves
+#' @format List as obtained by the function ODcurveToMetCurve
+"ODtoflux"
