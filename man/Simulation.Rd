@@ -77,7 +77,7 @@ data("iMM904")
 metabolites<-data.frame("name"=c("D-Glucose","Glycerol"),
                         "concentrations"=c(16,0))
 
-result_without_any_constraint<-Simulation(iMM904,time=seq(1,40,by=1),
+result_without_any_constraint<-Simulation(iMM904,time=seq(1,10,by=1),
                    metabolites,
                    initial_biomass=0.45,
                    aliases = aliases_SC)
@@ -92,7 +92,7 @@ PredictedGeneState<-predict_linear_model_influence(network = SC_GRN_1,
 GeneState<-data.frame("Name"=names(PredictedGeneState),
                     "State"=unname(PredictedGeneState))
 
-result<-Simulation(iMM904,time=seq(1,40,by=1),
+result<-Simulation(iMM904,time=seq(1,10,by=1),
                    metabolites,
                    initial_biomass=0.45,
                    gene_state_function=function(a,b){GeneState},

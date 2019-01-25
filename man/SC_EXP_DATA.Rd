@@ -6,9 +6,9 @@
 \title{SC_EXP_DATA
 A matrix of S. cerevisiae gene expression in various experimental designs,
 derived from the m3d dataset to infer S. cerevisiae gene regulatory network.
-The dataset was shorten to 5000 genes in order to limit the size of the
-object to 5 Mo}
-\format{a matrix of 5000 genes by 247 samples}
+The dataset was shorten to 3600 genes in order to limit the size of the
+object}
+\format{a matrix of 3600 genes by 247 samples}
 \usage{
 SC_EXP_DATA
 }
@@ -16,7 +16,7 @@ SC_EXP_DATA
 SC_EXP_DATA
 A matrix of S. cerevisiae gene expression in various experimental designs,
 derived from the m3d dataset to infer S. cerevisiae gene regulatory network.
-The dataset was shorten to 5000 genes in order to limit the size of the
-object to 5 Mo
+The dataset was shorten to 3600 genes in order to limit the size of the
+object
 }
 \keyword{datasets}
