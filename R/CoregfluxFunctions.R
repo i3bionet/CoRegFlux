@@ -232,7 +232,6 @@ train_continuous_model <- function(train_expression,
     predict_continuous <- matrix(nrow = dim(train_expression)[1], ncol = 1)
     rownames(predict_continuous) <- rownames(train_expression)
     for (i in 1:dim(train_expression)[1]) {
-        # for each row of expression, that is for each metabolic gene
         temp2 <- data.frame(expression = train_expression[i, ])
         # we find the set of regulators
         regulators_mgene <- CoRegNet::regulators(network,
@@ -496,8 +495,11 @@ predict_linear_model_influence <- function(network,
 
         TF_to_remove <- setdiff(rownames(train_influence),
                               names(experiment_influence))
-        train_influence<-train_influence[-which(
-            rownames(train_influence) %in% TF_to_remove),]
+        if(length(TF_to_remove) !=0){
+            train_influence<-train_influence[-which(
+                rownames(train_influence) %in% TF_to_remove),]
+        }
+
         train_results <- train_continuous_model(train_expression =
                                                    train_expression_metabolic,
                                                #threshold = discrete_threshold,
