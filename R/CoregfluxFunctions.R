@@ -82,25 +82,26 @@ continuous_gpr <- function(model, expression, scale = FALSE) {
 
 #' Update the model using the provided gene regulatory network and expression
 #'
-#' coregflux static uses the genes regulatory states to update the fluxes bounds
+#' `coregflux_static` uses the gene states to update the fluxes bounds
 #' from the metabolic model.
 #'
 #' @param model A genome-scale metabolic model of class modelorg
 #' @param predicted_gene_expression The vector of predicted gene expression for
 #' the genes present in the metabolic model as given by
-#' predict_linear_model_influence
+#' `predict_linear_model_influence`
 #' @param gene_parameter Parameter of the softplus function
 #' @param tol  Fluxes values below this threshold will be ignored.
 #' @param aliases a data.frame containing the gene names currently used in the
 #' network under the colname "geneName" and the alias under the colnames
 #' "alias"
-#' @return list of model: the metabolic model with the coregflux constrains
-#' added softplus_positive: the results of evaluating ln(1+exp(gpr(x+theta)))
+#' @return list containing: \item{model}{the metabolic model with the coregflux
+#' constraints added}
+#' \item{softplus_positive}{the results of evaluating ln(1+exp(gpr(x+theta)))
 #'  where gpr() are the continuous version of the gpr rules applied to a set of
-#'  gene expression x
-#' softplus_negative: the results of evaluating ln(1+exp(gpr(x+theta)))
+#'  gene expression x}
+#' \item{softplus_negative}{the results of evaluating ln(1+exp(gpr(x+theta)))
 #'  where gpr() are the continuous version of the gpr rules applied to a set of
-#'  gene expression x
+#'  gene expression x}
 #' @export
 #' @examples
 #' data("SC_GRN_1")
@@ -231,7 +232,7 @@ train_continuous_model <- function(train_expression,
     # prediction results
     predict_continuous <- matrix(nrow = dim(train_expression)[1], ncol = 1)
     rownames(predict_continuous) <- rownames(train_expression)
-    for (i in 1:dim(train_expression)[1]) {
+    for (i in seq_len(dim(train_expression)[1])) {
         temp2 <- data.frame(expression = train_expression[i, ])
         # we find the set of regulators
         regulators_mgene <- CoRegNet::regulators(network,
@@ -335,7 +336,7 @@ get_linear_model <- function(train_expression,
     # prediction results
     linear_models <- vector(mode = "list", length = dim(train)[1])
 
-    for (i in 1:dim(train)[1]) {
+    for (i in seq_len(dim(train)[1])) {
         # for each row of expression, that is for each metabolic gene
         temp2 <- data.frame(expression = train[i, ])
         # we find the set of regulators
@@ -382,7 +383,7 @@ predict_continuous_model <- function(linear_model, experiment_influence) {
     predict_continuous <- matrix(nrow = length(linear_model), ncol = 1)
     rownames(predict_continuous) <- unlist(lapply(linear_model,
                                                  function(x) x$gene))
-    for (i in 1:length(linear_model)) {
+    for (i in seq_along(linear_model)) {
         trained_model <- linear_model[[i]]
         model_formula <- trained_model$linear_model
         if (all(!is.na(trained_model))) {
@@ -469,13 +470,7 @@ predict_linear_model_influence <- function(network,
                                            #linear_model = NULL,
                                            aliases = NULL,
                                            verbose = 0) {
-    # see if there is an available linear model to predict gene expression
-    #if (!is.null(linear_model)) {
-    #    if(verbose==1){
-    #        message("using provided linear model to predict gene expression")}
-    #    train_results <- predict_continuous_model(linear_model,
-    #                                             experiment_influence)
-    #} else {
+
         if (!is.null(aliases)) {
             if(verbose==1){
                        message("Processing aliases ...")}
@@ -508,7 +503,6 @@ predict_linear_model_influence <- function(network,
                                                    experiment_influence,
                                               network = network)
 
-   # }
     return(train_results$predict_continuous[stats::complete.cases(
         train_results$predict_continuous), ])
 }

@@ -14,7 +14,7 @@ get_fba_fluxes_from_observations(model, observed_growth_rate,
 
 \item{observed_growth_rate}{a numerical value for the observed growth rate}
 
-\item{metabolites_rates}{Optional. a data.frame consisting of the name of the
+\item{metabolites_rates}{Optional, a data.frame consisting of the name of the
 metabolites, their concentrations and rates in mmol/gDW/h to adjust the model
 uptake rates. The column name must be "name", "concentrations","rates"}
 

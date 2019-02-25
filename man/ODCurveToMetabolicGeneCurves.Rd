@@ -13,7 +13,7 @@ ODCurveToMetabolicGeneCurves(times, ODs, metabolites_rates = NULL, model,
 \item{times}{A vector of timepoints at which the flux balance analysis
 solution will be evaluated.}
 
-\item{ODs}{vector of measured ODs}
+\item{ODs}{vector of measured ODs.}
 
 \item{metabolites_rates}{A data.frame containing the extraneous metabolites,
 their initial concentrations and their uptake rates. Columns must be named
@@ -21,18 +21,19 @@ their initial concentrations and their uptake rates. Columns must be named
 
 \item{model}{An object of class modelOrg, the metabolic model.}
 
-\item{softplusParam}{Softplus parameter identify through calibration}
+\item{softplusParam}{Softplus parameter identify through calibration.}
 
-\item{singlePointFluxEstimate}{Optional logical}
+\item{singlePointFluxEstimate}{Optional, logical.}
 
 \item{biomass_flux_index}{index of the flux corresponding to the biomass
 reaction.}
 
 \item{aliases}{Optional. A data.frame containing the gene names used in the
-metabolic model and the aliases to use to match the regulatory network}
+metabolic model and the aliases to use to match the regulatory network.}
 }
 \value{
-Metabolic genes curves
+Metabolic genes curves to visualize using the function
+`visMetabolicGeneCurves`
 }
 \description{
 ODCurveToMetabolicGeneCurves
@@ -42,4 +43,5 @@ ODs<-c(0.4500000,0.5322392,0.6295079,0.7445529)
 data("aliases_SC","iMM904")
 ODcurveToMetCurve<-ODCurveToMetabolicGeneCurves(times = seq(0.5,2,by=0.5),
 ODs = ODs,model = iMM904,aliases = aliases_SC)
+visMetabolicGeneCurves(ODcurveToMetCurve,genes="YJR077C")
 }

@@ -1,4 +1,4 @@
-#' Get fva intervals from an observed growth rate
+#' Get intervals of flux variability (FVA) from an observed growth rate
 #' @param model a genome-scale metabolic model of class modelorg
 #' @param observed_growth_rate a numerical value for the observed growth rate
 #' @param metabolites_rates Optional. a data.frame consisting of the name of the
@@ -43,7 +43,7 @@ get_fva_intervals_from_observations <- function(model,
 #'
 #' @param model a genome-scale metabolic model of class modelorg
 #' @param observed_growth_rate a numerical value for the observed growth rate
-#' @param metabolites_rates Optional. a data.frame consisting of the name of the
+#' @param metabolites_rates Optional, a data.frame consisting of the name of the
 #' metabolites, their concentrations and rates in mmol/gDW/h to adjust the model
 #' uptake rates. The column name must be "name", "concentrations","rates"
 #' @param biomass_flux_index Optional. Index of the biomass flux as returned by
@@ -120,7 +120,7 @@ adjust_constraints_to_observed_rates <- function(model,
                 data.frame fits the requirement")
     }
     if (!methods::.hasSlot(model, "irrev")) {
-        for (i in 1:length(uptake_bounds)) {
+        for (i in seq_along(uptake_bounds)) {
                 if (uptake_bounds[i] <= 0 ){
                     sybil::lowbnd(model)[metabolites_fluxes_indexes[i]] <-
                     uptake_bounds[i]
@@ -130,7 +130,7 @@ adjust_constraints_to_observed_rates <- function(model,
                 }
         }
     } else {
-        for (i in 1:length(uptake_bounds)) {
+        for (i in seq_along(uptake_bounds)) {
             sybil::uppbnd(model)[metabolites_fluxes_indexes[i]] <-
                 abs(uptake_bounds[i])
         }

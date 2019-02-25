@@ -23,16 +23,17 @@ network under the colname "geneName" and the alias under the colnames
 "alias"}
 }
 \value{
-list of model: the metabolic model with the coregflux constrains
-added softplus_positive: the results of evaluating ln(1+exp(gpr(x+theta)))
+list containing: \item{model}{the metabolic model with the coregflux
+constraints added}
+\item{softplus_positive}{the results of evaluating ln(1+exp(gpr(x+theta)))
  where gpr() are the continuous version of the gpr rules applied to a set of
- gene expression x
-softplus_negative: the results of evaluating ln(1+exp(gpr(x+theta)))
+ gene expression x}
+\item{softplus_negative}{the results of evaluating ln(1+exp(gpr(x+theta)))
  where gpr() are the continuous version of the gpr rules applied to a set of
- gene expression x
+ gene expression x}
 }
 \description{
-coregflux static uses the genes regulatory states to update the fluxes bounds
+`coregflux_static` uses the gene states to update the fluxes bounds
 from the metabolic model.
 }
 \examples{

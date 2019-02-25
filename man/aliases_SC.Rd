@@ -6,7 +6,11 @@
 \title{aliases_SC}
 \format{a two colums data.frame which first columns correspond to the name
 used in the model and the second to the ID used in the GRN (common name).
-Those columns should be named geneName_model and geneName_GRN respectively.}
+Those columns should be named geneName_model and geneName_GRN respectively.
+\describe{
+\item{geneName_model}{Aliases or gene names used in the gene-association
+field in the genome-scale metabolic model}
+\item{geneName_GRN}{Aliases or gene names used in the gene regulatory network}}}
 \usage{
 aliases_SC
 }

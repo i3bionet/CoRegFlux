@@ -2,7 +2,7 @@
 % Please edit documentation in R/FVAFunctions.R
 \name{get_fva_intervals_from_observations}
 \alias{get_fva_intervals_from_observations}
-\title{Get fva intervals from an observed growth rate}
+\title{Get intervals of flux variability (FVA) from an observed growth rate}
 \usage{
 get_fva_intervals_from_observations(model, observed_growth_rate,
   metabolites_rates = NULL,
@@ -25,7 +25,7 @@ Return the interval of fluxes values compatible with the observed
 growth rate through flux variability analysis
 }
 \description{
-Get fva intervals from an observed growth rate
+Get intervals of flux variability (FVA) from an observed growth rate
 }
 \examples{
 data("iMM904")

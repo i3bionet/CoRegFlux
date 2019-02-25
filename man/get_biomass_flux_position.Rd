@@ -12,7 +12,8 @@ get_biomass_flux_position(model, biomass_reaction_id = "biomass",
 
 \item{biomass_reaction_id}{Default value "biomass"}
 
-\item{biomass_reaction_name}{Optional.}
+\item{biomass_reaction_name}{Optional, the react_name in the modelOrg under
+which the biomass function can be found, such as "growth"}
 }
 \value{
 the position of the biomass generating reaction according the the

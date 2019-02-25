@@ -142,7 +142,7 @@ update_fluxes_constraints_influence <- function(model, coregnet,
     regulator_table<-PrepareRegulatorTable(regulator_table = regulator_table,
                                                coregnet= coregnet,
                                                aliases= aliases)
-    for(i in seq(1:dim(regulator_table)[1])){
+    for(i in seq_len(dim(regulator_table)[1])){
 
     TF <- regulator_table$regulator[i]
     influence <- regulator_table$influence[i]
@@ -233,7 +233,7 @@ update_fluxes_constraints_geneKOOV <- function(model,
     gene_table<-PrepareGeneTable(gene_table = gene_table,
                                  model = model,
                                  aliases= aliases)
-    for(i in seq(1:dim(gene_table)[1])){
+    for(i in seq_len(dim(gene_table)[1])){
         gene <- gene_table$gene[i]
         expression_factor <- gene_table$expression[i]
         model <- update_fluxes_constraints_GRegulation(model,as.character(gene),
@@ -705,7 +705,7 @@ Simulation <- function(model, time = c(0,1), metabolites, initial_biomass,
     soft_plus_positive <- list()
     soft_plus_negative <- list()
     #we perform a simulation step for each time point
-    for (i in 1:(length (time) - 1)){
+    for (i in seq_len(length (time) - 1)){
         if ( is.matrix(time_step_fba_bounds) ){
             if ( dim(time_step_fba_bounds)[2] == (length(time) - 1)){
                 sybil::lowbnd(model) <- ifelse(time_step_fba_bounds[, i] < 0,

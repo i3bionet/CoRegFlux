@@ -23,7 +23,7 @@ their initial concentrations and their uptake rates. Columns must be named
 biomass reaction.}
 }
 \value{
-FluxCurves
+An object FluxCurves to visualize using the function `visFluxCurves`
 }
 \description{
 ODCurveToFluxCurves

@@ -190,6 +190,7 @@ propagateBoundsUp <- function(G){
 }
 
 #' ODToFluxBounds
+#'
 #' @param model An object of class modelOrg, the metabolic model.
 #' @param odRate The values of OD measured over time
 #' @param metabolites_rates A data.frame containing the extraneous metabolites,
@@ -219,6 +220,7 @@ ODToFluxBounds <- function(odRate, model, metabolites_rates = NULL,
   cbind("name" = rownames(fluxBounds), fluxBounds, stringsAsFactors = FALSE)
 }
 #' ODCurveToFluxCurves
+#'
 #' @param model An object of class modelOrg, the metabolic model.
 #' @param ODs A vector of measured ODs
 #' @param times A vector of timepoints at which the flux balance analysis
@@ -242,7 +244,7 @@ ODToFluxBounds <- function(odRate, model, metabolites_rates = NULL,
 #' @seealso  visFluxCurves, ODCurveToMetabolicGeneCurves,
 #' visMetabolicGeneCurves
 #' @export
-#' @return FluxCurves
+#' @return An object FluxCurves to visualize using the function `visFluxCurves`
 ODCurveToFluxCurves <- function(model, ODs,times, metabolites_rates = NULL,
                         biomass_flux_index = get_biomass_flux_position(model)){
 
@@ -330,25 +332,28 @@ logRates <- function(xs, ys){
 
 
 #' ODCurveToMetabolicGeneCurves
+#'
 #' @param times A vector of timepoints at which the flux balance analysis
 #' solution will be evaluated.
-#' @param ODs  vector of measured ODs
+#' @param ODs  vector of measured ODs.
 #' @param metabolites_rates A data.frame containing the extraneous metabolites,
 #' their initial concentrations and their uptake rates. Columns must be named
 #' "names","concentrations" and "rates".
 #' @param model An object of class modelOrg, the metabolic model.
-#' @param softplusParam  Softplus parameter identify through calibration
-#' @param singlePointFluxEstimate Optional logical
+#' @param softplusParam  Softplus parameter identify through calibration.
+#' @param singlePointFluxEstimate Optional, logical.
 #' @param biomass_flux_index index of the flux corresponding to the biomass
 #' reaction.
 #' @param aliases Optional. A data.frame containing the gene names used in the
-#' metabolic model and the aliases to use to match the regulatory network
+#' metabolic model and the aliases to use to match the regulatory network.
 #' @examples ODs<-c(0.4500000,0.5322392,0.6295079,0.7445529)
 #' data("aliases_SC","iMM904")
 #' ODcurveToMetCurve<-ODCurveToMetabolicGeneCurves(times = seq(0.5,2,by=0.5),
 #' ODs = ODs,model = iMM904,aliases = aliases_SC)
+#' visMetabolicGeneCurves(ODcurveToMetCurve,genes="YJR077C")
 #' @export
-#' @return Metabolic genes curves
+#' @return Metabolic genes curves to visualize using the function
+#' `visMetabolicGeneCurves`
 
 ODCurveToMetabolicGeneCurves <- function(times,
                                         ODs,
@@ -459,7 +464,7 @@ GPRCurvesToMetabolicGeneCurves <- function(model,
 #' @param metabCurves result table from ODCurveToMetabolicGeneCurves
 #' @param genes a vector containing the names of the metabolic genes to plot.
 #' Default select the first 50 genes
-#' @param ... Optional others curves
+#' @param ... Optional, others curves
 #' @export
 #' @examples
 #' data("ODcurveToMetCurve")

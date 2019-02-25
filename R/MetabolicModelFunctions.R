@@ -2,7 +2,8 @@
 #'
 #' @param model An object of class modelOrg, the genome scale metabolic model
 #' @param biomass_reaction_id Default value "biomass"
-#' @param biomass_reaction_name Optional.
+#' @param biomass_reaction_name Optional, the react_name in the modelOrg under
+#' which the biomass function can be found, such as "growth"
 #' @return the position of the biomass generating reaction according the the
 #' objective
 #'in our case we had the biomass reactions for models iMM904 and iTO977
