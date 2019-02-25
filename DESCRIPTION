@@ -7,7 +7,7 @@ Maintainer: Pauline Trébulle and Mohamed Elati <coregflux@gmail.com>
 Description: CoRegFlux aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working.
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 SystemRequirements: GLPK (>= 4.42)
 Depends:
 	R (>= 3.6)
