@@ -1,0 +1,2 @@
+CoRegFlux requires the installation of glpkAPI, a CRAN package (R Interface to C API of GLPK), which needs GLPK Version >= 4.42. 
+In case GLPK is not already install on the computer, the user will need to download it from https://www.gnu.org/software/glpk/#downloading before proceeding to CoRegFlux installation.
