@@ -377,7 +377,7 @@ update_system_state <- function(flux_state,
 PrepareRegulatorTable<-function(regulator_table,coregnet,aliases){
     #In case of expression_factor = 1 remove the corresponding line
     regulator_table$expression<-round(regulator_table$expression)
-    if(any(grepl(1,regulator_table$expression))){
+    if(any(grepl('^1$',regulator_table$expression))){
        regulator_table <- regulator_table[!grepl(1,regulator_table$expression),]
     }
     # Replace 0 by 1 to carry out a KO in update_fluxes_constraints_influence
