@@ -3,14 +3,12 @@
 \docType{data}
 \name{ODcurveToMetCurve}
 \alias{ODcurveToMetCurve}
-\title{ODcurveToMetCurve
-List as obtained by the function ODcurveToMetCurve}
+\title{ODcurveToMetCurve}
 \format{List as obtained by the function ODcurveToMetCurve}
 \usage{
 ODcurveToMetCurve
 }
 \description{
-ODcurveToMetCurve
 List as obtained by the function ODcurveToMetCurve
 }
 \keyword{datasets}

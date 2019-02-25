@@ -3,17 +3,12 @@
 \docType{data}
 \name{SC_EXP_DATA}
 \alias{SC_EXP_DATA}
-\title{SC_EXP_DATA
-A matrix of S. cerevisiae gene expression in various experimental designs,
-derived from the m3d dataset to infer S. cerevisiae gene regulatory network.
-The dataset was shorten to 3600 genes in order to limit the size of the
-object}
+\title{SC_EXP_DATA}
 \format{a matrix of 3600 genes by 247 samples}
 \usage{
 SC_EXP_DATA
 }
 \description{
-SC_EXP_DATA
 A matrix of S. cerevisiae gene expression in various experimental designs,
 derived from the m3d dataset to infer S. cerevisiae gene regulatory network.
 The dataset was shorten to 3600 genes in order to limit the size of the

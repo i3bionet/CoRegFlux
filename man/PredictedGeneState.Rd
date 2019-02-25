@@ -3,15 +3,12 @@
 \docType{data}
 \name{PredictedGeneState}
 \alias{PredictedGeneState}
-\title{PredictedGeneState
-Predicted gene state as obtained by the function
-predict_linear_model_influence}
+\title{PredictedGeneState}
 \format{a named vector}
 \usage{
 PredictedGeneState
 }
 \description{
-PredictedGeneState
 Predicted gene state as obtained by the function
 predict_linear_model_influence
 }

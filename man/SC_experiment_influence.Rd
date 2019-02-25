@@ -3,14 +3,12 @@
 \docType{data}
 \name{SC_experiment_influence}
 \alias{SC_experiment_influence}
-\title{SC_experiment_influence
-A vector of influence computed from the first sample of SC_Test_data}
+\title{SC_experiment_influence}
 \format{a named numerical vector}
 \usage{
 SC_experiment_influence
 }
 \description{
-SC_experiment_influence
 A vector of influence computed from the first sample of SC_Test_data
 }
 \keyword{datasets}

@@ -3,14 +3,12 @@
 \docType{data}
 \name{ODtoflux}
 \alias{ODtoflux}
-\title{ODtoflux
-List as obtained by the function ODCurveToFluxCurves}
+\title{ODtoflux}
 \format{List as obtained by the function ODcurveToMetCurve}
 \usage{
 ODtoflux
 }
 \description{
-ODtoflux
 List as obtained by the function ODCurveToFluxCurves
 }
 \keyword{datasets}

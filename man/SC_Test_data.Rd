@@ -3,15 +3,12 @@
 \docType{data}
 \name{SC_Test_data}
 \alias{SC_Test_data}
-\title{SC_Test_data
-A matrix of S. cerevisiae gene expression during diauxic shift (Brauer and
-al.)}
+\title{SC_Test_data}
 \format{a matrix of 6028 genes by 13 samples during diauxic shift}
 \usage{
 SC_Test_data
 }
 \description{
-SC_Test_data
 A matrix of S. cerevisiae gene expression during diauxic shift (Brauer and
 al.)
 }

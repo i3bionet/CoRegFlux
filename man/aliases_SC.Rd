@@ -3,9 +3,7 @@
 \docType{data}
 \name{aliases_SC}
 \alias{aliases_SC}
-\title{aliases_SC
-A data.frame containing the gene ID used in the metabolic model and their
-common name, used in the gene regulatory network}
+\title{aliases_SC}
 \format{a two colums data.frame which first columns correspond to the name
 used in the model and the second to the ID used in the GRN (common name).
 Those columns should be named geneName_model and geneName_GRN respectively.}
@@ -13,7 +11,6 @@ Those columns should be named geneName_model and geneName_GRN respectively.}
 aliases_SC
 }
 \description{
-aliases_SC
 A data.frame containing the gene ID used in the metabolic model and their
 common name, used in the gene regulatory network
 }

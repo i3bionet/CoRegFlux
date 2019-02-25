@@ -3,23 +3,12 @@
 \docType{data}
 \name{SC_GRN_1}
 \alias{SC_GRN_1}
-\title{SC_GRN_1
-A coregnet object infered from the m3d dataset describing the gene
-regulatory network for S. cerevisiae as described in Banos, D. T., Trébulle,
-P., & Elati, M. (2017). Integrating transcriptional activity in genome-scale
-models of metabolism. BMC systems biology, 11(7), 134.
-\describe{
-  \item{Number of transcription factor }{200}
-  \item{Number of targets genes}{3748}
-  \item{Evidences}{TRUE}
-  ...
-}}
+\title{SC_GRN_1}
 \format{An object of class \code{coregnet} of dimension 200 x 3748 x 16283.}
 \usage{
 SC_GRN_1
 }
 \description{
-SC_GRN_1
 A coregnet object infered from the m3d dataset describing the gene
 regulatory network for S. cerevisiae as described in Banos, D. T., Trébulle,
 P., & Elati, M. (2017). Integrating transcriptional activity in genome-scale

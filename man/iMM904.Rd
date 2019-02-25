@@ -3,15 +3,13 @@
 \docType{data}
 \name{iMM904}
 \alias{iMM904}
-\title{iMM904
-A S. cerevisiae genome-scale metabolic model as a modelOrg object}
+\title{iMM904}
 \format{a modelOrg object as required by sybil. See sybilSBML for more
 information on how to load other model.}
 \usage{
 iMM904
 }
 \description{
-iMM904
 A S. cerevisiae genome-scale metabolic model as a modelOrg object
 }
 \keyword{datasets}
