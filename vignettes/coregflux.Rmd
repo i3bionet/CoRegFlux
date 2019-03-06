@@ -284,6 +284,9 @@ ODtoflux<-ODCurveToFluxCurves(model = iMM904,
 visFluxCurves(ODtoflux, genes ="ADK3")
 ```
 
+During this step, you might get a message from R.cache to choose where the cached files should be saved. Since those files are only temporary files, you can create a 
+dedicated folder in your working directory which you can remove afterward, or pick a location near the installation folder of the R.cache package.
+
 # Simulations, constraints and calibration 
 
 ## Simulations
