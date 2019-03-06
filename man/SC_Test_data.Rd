@@ -3,7 +3,7 @@
 \docType{data}
 \name{SC_Test_data}
 \alias{SC_Test_data}
-\title{SC_Test_data}
+\title{SC_Test_data data}
 \format{a matrix of 6028 genes by 13 samples during diauxic shift}
 \source{
 E-GEOD-4398 (Brauer MJ and al.)

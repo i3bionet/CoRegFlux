@@ -3,7 +3,7 @@
 \docType{data}
 \name{SC_experiment_influence}
 \alias{SC_experiment_influence}
-\title{SC_experiment_influence}
+\title{SC_experiment_influence data}
 \format{a named numerical vector}
 \usage{
 SC_experiment_influence

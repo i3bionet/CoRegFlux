@@ -1,4 +1,4 @@
-#' SC_GRN_1
+#' SC_GRN_1 data
 #'
 #' A coregnet object infered from the m3d dataset describing the gene
 #' regulatory network for S. cerevisiae as described in Banos, D. T., Trébulle,
@@ -13,7 +13,7 @@
 #' }
 "SC_GRN_1"
 
-#' aliases_SC
+#' aliases_SC data
 #'
 #' A data.frame containing the gene ID used in the metabolic model and their
 #' common name, used in the gene regulatory network
@@ -26,7 +26,7 @@
 #' \item{geneName_GRN}{Aliases or gene names used in the gene regulatory network}}
 "aliases_SC"
 
-#' SC_EXP_DATA
+#' SC_EXP_DATA data
 #'
 #' A matrix of S. cerevisiae gene expression in various experimental designs,
 #' derived from the m3d dataset to infer _S. cerevisiae_ gene regulatory network.
@@ -36,7 +36,7 @@
 #' @source subset of m3d dataset available at \url{http://m3d.mssm.edu/}
 "SC_EXP_DATA"
 
-#' SC_Test_data
+#' SC_Test_data data
 #'
 #' A matrix of S. cerevisiae gene expression during diauxic shift (Brauer and
 #' al.)
@@ -44,20 +44,20 @@
 #' @source E-GEOD-4398 (Brauer MJ and al.)
 "SC_Test_data"
 
-#' SC_experiment_influence
+#' SC_experiment_influence data
 #'
 #' A vector of influence computed from the first sample of SC_Test_data
 #' @format a named numerical vector
 "SC_experiment_influence"
 
-#' iMM904
+#' iMM904 data
 #'
 #' A _S. cerevisiae_ genome-scale metabolic model as a modelOrg object
 #' @format a modelOrg object as required by _sybil_. See _sybilSBML_ for more
 #' information on how to load other model.
 "iMM904"
 
-#' PredictedGeneState
+#' PredictedGeneState data
 #'
 #' Predicted gene states as obtained by the function
 #' \code{predict_linear_model_influence}
@@ -65,13 +65,13 @@
 #' gene state.
 "PredictedGeneState"
 
-#' ODcurveToMetCurve
+#' ODcurveToMetCurve data
 #'
 #' List as obtained by the function \code{ODCurveToMetabolicGeneCurves}
 #' @format List as obtained by the function \code{ODCurveToMetabolicGeneCurves}
 "ODcurveToMetCurve"
 
-#' ODtoflux
+#' ODtoflux data
 #'
 #' List as obtained by the function \code{ODCurveToFluxCurves}
 #' @format List as obtained by the function \code{ODCurveToFluxCurves}

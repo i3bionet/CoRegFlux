@@ -3,7 +3,7 @@
 \docType{data}
 \name{SC_GRN_1}
 \alias{SC_GRN_1}
-\title{SC_GRN_1}
+\title{SC_GRN_1 data}
 \format{a coregnet object inferred using the package _CoRegNet_
 \describe{
   \item{Number of transcription factor }{200}

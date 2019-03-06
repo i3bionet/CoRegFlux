@@ -3,7 +3,7 @@
 \docType{data}
 \name{PredictedGeneState}
 \alias{PredictedGeneState}
-\title{PredictedGeneState}
+\title{PredictedGeneState data}
 \format{a named vector containing the gene name and its associated predicted
 gene state.}
 \usage{

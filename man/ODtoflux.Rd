@@ -3,7 +3,7 @@
 \docType{data}
 \name{ODtoflux}
 \alias{ODtoflux}
-\title{ODtoflux}
+\title{ODtoflux data}
 \format{List as obtained by the function \code{ODCurveToFluxCurves}}
 \usage{
 ODtoflux

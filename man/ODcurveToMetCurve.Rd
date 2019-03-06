@@ -3,7 +3,7 @@
 \docType{data}
 \name{ODcurveToMetCurve}
 \alias{ODcurveToMetCurve}
-\title{ODcurveToMetCurve}
+\title{ODcurveToMetCurve data}
 \format{List as obtained by the function \code{ODCurveToMetabolicGeneCurves}}
 \usage{
 ODcurveToMetCurve

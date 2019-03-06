@@ -3,7 +3,7 @@
 \docType{data}
 \name{aliases_SC}
 \alias{aliases_SC}
-\title{aliases_SC}
+\title{aliases_SC data}
 \format{a two colums data.frame which first columns correspond to the name
 used in the model and the second to the ID used in the GRN (common name).
 Those columns should be named geneName_model and geneName_GRN respectively.
