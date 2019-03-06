@@ -234,6 +234,7 @@ ODToFluxBounds <- function(odRate, model, metabolites_rates = NULL,
 #' @param biomass_flux_index Optional. index of the flux corresponding to the
 #' biomass reaction.
 #' @examples
+#' data(iMM904)
 #' ODs<-seq.int(0.099,1.8,length.out = 5)
 #' times = seq(0.5,2,by=0.5)
 #'
