@@ -18,3 +18,4 @@ obj- value of the objective function for the flux balance analyis solution.
 Here we just perform a flux balance analysis solution and store the objective
  and the fluxes
 }
+\keyword{internal}

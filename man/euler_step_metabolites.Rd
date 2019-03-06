@@ -29,3 +29,4 @@ Compute the metabolite concentrations at the next time point
 \seealso{
 euler_step_biomass, update_system_state
 }
+\keyword{internal}

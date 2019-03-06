@@ -21,3 +21,4 @@ on the expression of the metabolic genes present in the gpr
 Transform a logic gpr rule string to  a list and then evaluate the
 continuous version of the rules
 }
+\keyword{internal}

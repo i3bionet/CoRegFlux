@@ -381,7 +381,6 @@ ODCurveToMetabolicGeneCurves <- function(times,
   lrates <- lRates[positiveDeltaIds]
   L <- lapply(seq_along(lrates), function(i){
     od <- lrates[i]
-    #browser()
     metab <- if(is.null(metabolites_rates)) NULL
      else {metab <- metabolites_rates}
     R.cache::evalWithMemoization(

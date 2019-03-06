@@ -10,7 +10,8 @@
 #' @return biomass after time.step=t1-t0: biomass.t1 = biomass.t0 *
 #' exp(rate * time.step)
 #'
-#' @seealso euler_step_metabolites , update_system_state
+#' @seealso euler_step_metabolites, update_system_state
+#' @keywords internal
 
 euler_step_biomass <- function(biomass_t0, rate, time_step){
     return(biomass_t0 * exp( rate * time_step ))
@@ -29,6 +30,7 @@ euler_step_biomass <- function(biomass_t0, rate, time_step){
 #'
 #' @return metabolites concentrations at the next time point
 #' @seealso euler_step_biomass, update_system_state
+#' @keywords internal
 
 euler_step_metabolites <- function(met_concentrations_t0,
                                    fluxes, biomass_t0, rate, time_step){
@@ -48,7 +50,7 @@ euler_step_metabolites <- function(met_concentrations_t0,
 #' @return  list with the element
 #' fluxes - fluxes of the flux balance analysis solution
 #' obj- value of the objective function for the flux balance analyis solution.
-#'
+#' @keywords internal
 FBA_step <- function(model){
 
     Esol <- sybil::optimizeProb(model, algorithm = "fba")
@@ -251,6 +253,7 @@ update_fluxes_constraints_geneKOOV <- function(model,
 #' @param p_function Perturbation function
 #'
 #' @return Return the model with updated bounds
+#' @keywords internal
 
 update_fluxes_constraints_GRegulation <- function(model,
                                                   target_genes_names,
@@ -273,7 +276,7 @@ update_fluxes_constraints_GRegulation <- function(model,
 #' @param expression_factor Numerical value by which the current value of
 #' the bounds can be multiply with
 #' @return New bound value
-#'
+#' @keywords internal
 
 
 perturbation_function <- function(old_bound,
@@ -316,7 +319,7 @@ logistic <- function(x, expression_factor){
 #' metabolites
 #' obj: value of the objective function obtained by the flux balance analysis
 #' model.
-#'
+#' @keywords internal
 update_fluxes_state <- function(model, met_fluxes_indexes,
                                 biomass_flux_index){
     FBA_solution <- FBA_step(model)
@@ -347,6 +350,7 @@ update_fluxes_state <- function(model, met_fluxes_indexes,
 #' @param Biomass_Yield_To_Rate Function to convert biomass to rate.
 #' Default is f(x)=1*x
 #' @return Return updated biomass and metabolites concentrations
+#' @keywords internal
 
 update_system_state <- function(flux_state,
                                 biomass_t0,

@@ -22,5 +22,6 @@ This function updates the biomass given the biomass at the
 previous time step and the size of the time step.
 }
 \seealso{
-euler_step_metabolites , update_system_state
+euler_step_metabolites, update_system_state
 }
+\keyword{internal}

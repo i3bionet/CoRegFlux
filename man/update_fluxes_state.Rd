@@ -29,3 +29,4 @@ Updates the fluxes values by performing flux balance analysis, it is
 necessary to indicate the indexes of the extraneous metabolites and the
 biomass reaction. It performs an fba step and selects the given fluxes
 }
+\keyword{internal}

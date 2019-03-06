@@ -7,6 +7,7 @@
 #'
 #' @return A numerical value corresponding to the evaluation of the flux based
 #' on the expression of the metabolic genes present in the gpr
+#' @keywords internal
 
 gpr_expression <- function(gpr, expression) {
     gpr <- gsub("[()]", "", gpr)
@@ -59,6 +60,7 @@ gpr_expression <- function(gpr, expression) {
 #'
 #' @return A metabolic model with lower and upper bound corresponding to the
 #' continuous version of the rule evaluation and zero on unaffected fluxes.
+#' @keywords internal
 
 
 continuous_gpr <- function(model, expression, scale = FALSE) {
@@ -209,6 +211,7 @@ evaluate_softplus <- function(gene.parameter, X) {
 #'
 #' @return The predicted gene expression levels compute from the linear model
 #' and the experiment influence
+#' @keywords internal
 
 train_continuous_model <- function(train_expression,
                                    train_influence,

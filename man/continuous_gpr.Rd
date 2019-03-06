@@ -25,3 +25,4 @@ This function was adapted from code present in \cite{exp2flux}.
  equivalence is OR(A,B) <- sum(A,B); AND(A,B) <- min(A,B),
  more in accordance with \cite{tiger}
 }
+\keyword{internal}

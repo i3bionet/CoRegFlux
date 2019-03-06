@@ -62,6 +62,7 @@ get_biomass_flux_position <- function(model, biomass_reaction_id = "biomass",
 #' @param exchange_met A data.frame as build by the function build_exchange_met
 #' @return A data.frame containing the exchange metabolite model id and the
 #' equivalent name
+#' @keywords internal
 
 convert_metabolites_to_model_names <- function(metabolites, model,
                                                exchange_met=

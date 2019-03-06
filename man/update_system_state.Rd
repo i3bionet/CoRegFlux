@@ -25,3 +25,4 @@ Return updated biomass and metabolites concentrations
 \description{
 Update the fluxes, metabolites concentration and biomass in the system
 }
+\keyword{internal}

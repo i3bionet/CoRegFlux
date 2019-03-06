@@ -22,3 +22,4 @@ equivalent name
 \description{
 Convert metabolites name to the model equivalent
 }
+\keyword{internal}

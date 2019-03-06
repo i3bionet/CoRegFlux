@@ -21,3 +21,4 @@ Return the model with updated bounds
 Update the fluxes constraints to simulate a knockout/over-expression using a
 penalty function (logistic) over the targets of a given TF
 }
+\keyword{internal}
