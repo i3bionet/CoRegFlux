@@ -3,7 +3,7 @@
 \docType{data}
 \name{iMM904}
 \alias{iMM904}
-\title{iMM904 data}
+\title{iMM904}
 \format{a modelOrg object as required by _sybil_. See _sybilSBML_ for more
 information on how to load other model.}
 \usage{

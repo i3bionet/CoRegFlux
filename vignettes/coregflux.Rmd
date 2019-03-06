@@ -3,9 +3,15 @@ title: "CoRegFlux"
 author: "Pauline Trébulle, Daniel Trejo-Banos, Mohamed Elati"
 date: "December 2018"
 output:
-  pdf_document: default
-  rmarkdown::html_vignette: default
+  rmarkdown::html_vignette: 
+    toc: true
+    toc_depth: 2
+    number_sections: true
   html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+  pdf_document: 
     toc: true
     toc_depth: 2
     number_sections: true
@@ -15,8 +21,17 @@ vignette: |
   %\VignetteEngine{knitr::rmarkdown} 
 ---
 
-```{r setup, include = TRUE}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#"
+)
 
+library(CoRegFlux)
+library(CoRegNet)
+library(sybil)
+library(latex2exp)
 
 data("SC_GRN_1")
 data("SC_EXP_DATA")
@@ -24,11 +39,6 @@ data("SC_experiment_influence")
 data("SC_Test_data")
 data("aliases_SC")
 data("iMM904")
-library(CoRegFlux)
-library(CoRegNet)
-library(sybil)
-library(latex2exp)
-
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
 
@@ -38,9 +48,7 @@ metabolites_rates<- data.frame("name"=c("D-Glucose"),
 
 model_uptake_constraints <- adjust_constraints_to_observed_rates(model = iMM904,
                             metabolites_with_rates = metabolites_rates)
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#")
+
 Testing_influence_matrix <- CoRegNet::regulatorInfluence(SC_GRN_1,SC_Test_data)
 experiment_influence<- Testing_influence_matrix[,1]
 
@@ -50,21 +58,22 @@ PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
                     min_Target = 4,
                     model = iMM904,
                     aliases = aliases_SC)
+
+Simulation1<-Simulation(model = iMM904,
+                        time = seq(1,20,by = 1),
+                        metabolites = metabolites,
+                        initial_biomass = 0.45,
+                        aliases = aliases_SC)
 ```
 This Vignette accompanies the CoRegFlux package. It can be used either to get some additional information about the methods or to get examples of the use of the functions. Feel free to ask any question to the package maintainer (coregflux at gmail dot com).
 
+
 \tableofcontents
 
-# Introduction 
-
-The CoRegFlux package aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working. The following figure summurize the different functions available in the package to constraint the genome-scale metabolic model with gene expression for wild-type or mutants or to run a complete simulation using those constraints.
-
-
-<img src="FigureWithFunctions.png" alt="Summary of CoRegFlux functions and features" width="650"/>
 
 # Installation
 
-Install:
+Install CoRegFlux:
 
 ``` {r,warning = FALSE, eval = FALSE}
 if(!requireNamespace("BiocManager", quietly = TRUE))
@@ -72,11 +81,18 @@ if(!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("CoRegFlux")
 ```
 
-Load:
+Load CoRegFlux:
 
 ```{r,warning = FALSE, eval = FALSE}
 library(CoRegFlux)
 ```
+
+# Introduction 
+
+The CoRegFlux package aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working. 
+The following figure summarize the different functions available in the package to constraint the genome-scale metabolic model with gene expression for wild-type or mutants or to run a complete simulation using those constraints.  
+
+<img src="FigureWithFunctions.png" alt="Summary of CoRegFlux functions and features" width="650"/>  
 
 # Data requirement 
 
@@ -90,7 +106,7 @@ To use *all* CoRegFlux features you will need:
 Examples data are provided with the package, including  genome-scale metabolic model iMM904 for _Saccharomyces Cerevisiae_ (SC), a gene regulatory network build for SC from the m3D database as described in \cite{Trejo Banos et al., "Integrating transcriptional activity in genome-scale models of metabolism", BMC Systems Biology 2017}, as well as a subset of the m3D dataset to train the model and provide gene expression data. To study others organims or another regulatory network, you will need to build a GRN using the _CoRegNet_ package and/or choose
 relevant datasets. 
 
-# Quick user guide
+# User guide
 
 ## Computing Influence using _CoRegNet_ package function 
 ```{r,warning = FALSE}
@@ -104,7 +120,7 @@ experiment_influence<- Testing_influence_matrix[,1]
 
 Here are the main functionalities of _CoRegFlux_ 
 
-## 1. Predict gene state/gene expression level from a condition specific experiment using a linear model
+## Predict gene state/gene expression level from a condition specific experiment using a linear model
 ```{r, warning= FALSE} 
 data("aliases_SC")
 PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
@@ -117,178 +133,7 @@ PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
 GeneState<-data.frame("Name" = names(PredictedGeneState),
                      "State" = unname(PredictedGeneState))
 ```
-    
-## 2. Simulate dFBA over time (here 20h) without constraint
-```{r, warning = FALSE,message = FALSE}
-
-# 16.6 mmol ± =  3g/L Glucose
-metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
-                        "concentrations" = c(16.6,0))
-
-Simulation1<-Simulation(model = iMM904,
-                        time = seq(1,20,by = 1),
-                        metabolites = metabolites,
-                        initial_biomass = 0.45,
-                        aliases = aliases_SC)
-	
-Simulation1$biomass_history
-Simulation1$met_concentration_history
-```
-	
-## 3. Simulate a dFBA with gene expression as a constraint
-
-```{r, message = FALSE}
-Simulation2<-Simulation(model = iMM904,
-	                    time = seq(1,20,by = 1),
-                        metabolites = metabolites,
-                        initial_biomass = 0.45,
-	                    aliases = aliases_SC,
-                        gene_state_function = function(a,b){GeneState})
-	
-Simulation2$biomass_history
-Simulation2$met_concentration_history
-
-```
-	
-## 4. Simulate a dFBA with TF knock-out (KO) while constraining the model with gene expression 
-
-If the simulated mutant have several TFs KO or OV, CoRegFlux will constrain the model according to the order of the TFs in the regulator table.
-While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
-
-```{r,message = FALSE}
-regulator_table <- data.frame("regulator" = "MET32",
-                              "influence" =  -1.20322,
-                              "expression" = 0,
-                              stringsAsFactors = FALSE)
-
-SimulationTFKO<-Simulation(model = iMM904,
-	                    time = seq(1,20,by = 1),
-                        metabolites = metabolites,
-                        initial_biomass = 0.45,
-	                    aliases = aliases_SC,
-                        coregnet = SC_GRN_1,
-                        regulator_table = regulator_table ,
-                        gene_state_function = function(a,b){GeneState})
-
-SimulationTFKO$biomass_history ## This KO is predicted as non-lethal 
-```
-
-## 5. Simulate a dFBA with TF over-expression (OV) while constraining the model with gene expression 
-
-If the simulated mutant have several TFs KO or OV, CoRegFlux will constrain the model according to the order of the TFs in the regulator table.
-While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
-
-
-```{r,message =FALSE}
-regulator_table <- data.frame("regulator" = "MET32",
-                                  "influence" = -1.20322 ,
-                                  "expression" = 3,
-                                  stringsAsFactors = FALSE)
-
-SimulationTFOV<-Simulation(model = iMM904,
-		                    time = seq(1,20,by = 1),
-                            metabolites = metabolites,
-                            initial_biomass = 0.45,
-		                    aliases = aliases_SC,
-                            coregnet = SC_GRN_1,
-                            regulator_table = regulator_table,
-                            gene_state_function = function(a,b){GeneState})
-
-SimulationTFOV$biomass_history ## This OV is predicted as non-lethal
-```
-
-## 6. Simulate a dFBA with gene(s) knock-out or over-expression simulation while constraining the model with gene expression
-
-If the simulated mutant have several gene KO or gene OV, CoRegFlux will constrain the model according to the order of the genes in the gene table.
-While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
-
-
-```{r,message =FALSE}
-gene_table <- data.frame("gene" = c("YJL026W","YIL162W"),
-                                  "expression" =c(2,0),
-                                  stringsAsFactors = FALSE)
-
-SimulationGeneKO_OV<-Simulation(model = iMM904,
-                                time = seq(1,20,by = 1),
-                                metabolites = metabolites,
-                                initial_biomass = 0.45,
-		                        aliases = aliases_SC,
-                                coregnet = SC_GRN_1,
-                                gene_table = gene_table,
-                                gene_state_function = function(a,b){GeneState})
-
-SimulationGeneKO_OV$biomass_history ## This OV is predicted as non-lethal
-```
-
-## 7. Constrain the model according to gene expression, TF KO or OV, gene KO or OV to run various FBA using sybil 
-
-The different functions used by CoRegFlux to constraint the model are individually accessible to allow the combination of CoRegFlux's models with other algorithms and parameters, provided by sybil for instance. A model can be constrain iteratively through the different function. In that case, the recommended order is as follows: uptake constraint, gene expression, TF KO or OV, gene KO or OV.
-
-```{r,eval=FALSE,message =FALSE,warnings=FALSE}
-
-metabolites_rates <- data.frame("name"=c("D-Glucose"),
-                               "concentrations"=c(16.6),
-                               "rates"=c(-2.81))
-
-model_uptake_constraints <- adjust_constraints_to_observed_rates(model = iMM904, 
-                                    metabolites_with_rates = metabolites_rates)
-
-model_gene_constraints <- coregflux_static(model= iMM904,
-                                           predicted_gene_expression = 
-                                               PredictedGeneState,
-                                           aliases = aliases_SC)$model
-
-model_TF_KO_OV_constraints <- update_fluxes_constraints_influence(model= iMM904,
-                                           coregnet = SC_GRN_1,
-                                           regulator_table = regulator_table,
-                                           aliases = aliases_SC )
-
-model_gene_KO_OV_constraints <- update_fluxes_constraints_geneKOOV(
-                                            model= iMM904,
-                                            gene_table =  gene_table,
-                                            aliases = aliases_SC)
-
-sol <- sybil::optimizeProb(model_TF_KO_OV_constraints)                                              
-```
-
-## 8. Adjusting the fluxes bounds based on observed growth rates, and visualized its effects on metabolic genes 
-
-	
-```{r, message = FALSE, warnings = FALSE}
-
-FBA_bounds_from_growthrate<- get_fba_fluxes_from_observations(
-    model = iMM904,observed_growth_rate = 0.3,
-    metabolites_rates = metabolites_rates)
-
-FVA_bounds_from_growthrate<- get_fva_intervals_from_observations(
-    model = iMM904,observed_growth_rate = 0.3,
-    metabolites_rates = metabolites_rates)
-```
-
-```{r, message= FALSE, warning=FALSE}
-ODs<-seq.int(0.099,1.8,length.out = 5)
-times = seq(0.5,2,by=0.5)
-
-ODcurveToMetCurve<- ODCurveToMetabolicGeneCurves(times = times,
-                             ODs = ODs,
-                             model = iMM904,
-                             aliases = aliases_SC,
-                             metabolites_rates = metabolites_rates) 
-
-visMetabolicGeneCurves(ODcurveToMetCurve,genes = "YJR077C")
-
-ODtoflux<-ODCurveToFluxCurves(model = iMM904,
-                              ODs = ODs,
-                              times = times,
-                              metabolites_rates = metabolites_rates)
-
-visFluxCurves(ODtoflux, genes ="ADK3")
-```
-
-During this step, you might get a message from R.cache to choose where the cached files should be saved. Since those files are only temporary files, you can create a 
-dedicated folder in your working directory which you can remove afterward, or pick a location near the installation folder of the R.cache package.
-
-# Simulations, constraints and calibration 
+ 
 
 ## Simulations
 
@@ -324,7 +169,7 @@ The fluxes for the simulation time are stored in a matrix which row names are th
 
 
 ```{r}
-Simulation1$fluxes_history[1:10,1:9]
+Simulation1$fluxes_history[1:10,1:5]
 ```
 
 To have access to the gprRules users can use the sybil package, which returns a vector of size equal to the number of fluxes and the associated genes.
@@ -338,6 +183,23 @@ If you only wish to know which gene affects which reaction; the sybil objects ha
 
 ```{r}
 iMM904@rxnGeneMat[1:10,1:10]
+```
+
+### Simulate a dFBA over time (here 20h) without constraint
+```{r, warning = FALSE,message = FALSE}
+
+# 16.6 mmol ± =  3g/L Glucose
+metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
+                        "concentrations" = c(16.6,0))
+
+Simulation1<-Simulation(model = iMM904,
+                        time = seq(1,20,by = 1),
+                        metabolites = metabolites,
+                        initial_biomass = 0.45,
+                        aliases = aliases_SC)
+	
+Simulation1$biomass_history
+Simulation1$met_concentration_history
 ```
 
 ## Constraining the model
@@ -368,6 +230,122 @@ sol<-sybil::optimizeProb(model_TF_KO_OV_constraints)
 # algorithms
 
 sol
+```
+	
+### Simulate a dFBA with gene expression as a constraint
+
+```{r, message = FALSE}
+Simulation2<-Simulation(model = iMM904,
+	                    time = seq(1,20,by = 1),
+                        metabolites = metabolites,
+                        initial_biomass = 0.45,
+	                    aliases = aliases_SC,
+                        gene_state_function = function(a,b){GeneState})
+	
+Simulation2$biomass_history
+Simulation2$met_concentration_history
+
+```
+	
+### Simulate a dFBA with TF knock-out (KO) while constraining the model with gene expression 
+
+If the simulated mutant have several TFs KO or OV, CoRegFlux will constrain the model according to the order of the TFs in the regulator table.
+While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
+
+```{r,message = FALSE}
+regulator_table <- data.frame("regulator" = "MET32",
+                              "influence" =  -1.20322,
+                              "expression" = 0,
+                              stringsAsFactors = FALSE)
+
+SimulationTFKO<-Simulation(model = iMM904,
+	                    time = seq(1,20,by = 1),
+                        metabolites = metabolites,
+                        initial_biomass = 0.45,
+	                    aliases = aliases_SC,
+                        coregnet = SC_GRN_1,
+                        regulator_table = regulator_table ,
+                        gene_state_function = function(a,b){GeneState})
+
+SimulationTFKO$biomass_history ## This KO is predicted as non-lethal 
+```
+
+### Simulate a dFBA with TF over-expression (OV) while constraining the model with gene expression 
+
+If the simulated mutant have several TFs KO or OV, CoRegFlux will constrain the model according to the order of the TFs in the regulator table.
+While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
+
+
+```{r,message =FALSE}
+regulator_table <- data.frame("regulator" = "MET32",
+                                  "influence" = -1.20322 ,
+                                  "expression" = 3,
+                                  stringsAsFactors = FALSE)
+
+SimulationTFOV<-Simulation(model = iMM904,
+		                    time = seq(1,20,by = 1),
+                            metabolites = metabolites,
+                            initial_biomass = 0.45,
+		                    aliases = aliases_SC,
+                            coregnet = SC_GRN_1,
+                            regulator_table = regulator_table,
+                            gene_state_function = function(a,b){GeneState})
+
+SimulationTFOV$biomass_history ## This OV is predicted as non-lethal
+```
+
+### Simulate a dFBA with gene(s) knock-out or over-expression simulation while constraining the model with gene expression
+
+If the simulated mutant have several gene KO or gene OV, CoRegFlux will constrain the model according to the order of the genes in the gene table.
+While this example also constraint the model with gene expression, it is possible to run the simulation without such constraints.
+
+
+```{r,message =FALSE}
+gene_table <- data.frame("gene" = c("YJL026W","YIL162W"),
+                                  "expression" =c(2,0),
+                                  stringsAsFactors = FALSE)
+
+SimulationGeneKO_OV<-Simulation(model = iMM904,
+                                time = seq(1,20,by = 1),
+                                metabolites = metabolites,
+                                initial_biomass = 0.45,
+		                        aliases = aliases_SC,
+                                coregnet = SC_GRN_1,
+                                gene_table = gene_table,
+                                gene_state_function = function(a,b){GeneState})
+
+SimulationGeneKO_OV$biomass_history ## This OV is predicted as non-lethal
+```
+
+### Constraining the model according to gene expression, TF KO or OV, gene KO or OV to run various FBA using sybil 
+
+The different functions used by CoRegFlux to constraint the model are individually accessible to allow the combination of CoRegFlux's models with other algorithms and parameters, provided by sybil for instance. A model can be constrain iteratively through the different function. In that case, the recommended order is as follows: uptake constraint, gene expression, TF KO or OV, gene KO or OV.
+
+```{r,eval=FALSE,message =FALSE,warnings=FALSE}
+
+metabolites_rates <- data.frame("name"=c("D-Glucose"),
+                               "concentrations"=c(16.6),
+                               "rates"=c(-2.81))
+
+model_uptake_constraints <- adjust_constraints_to_observed_rates(model = iMM904, 
+                                    metabolites_with_rates = metabolites_rates)
+
+model_gene_constraints <- coregflux_static(model= iMM904,
+                                           predicted_gene_expression = 
+                                               PredictedGeneState,
+                                           aliases = aliases_SC)$model
+
+model_TF_KO_OV_constraints <- update_fluxes_constraints_influence(model= iMM904,
+                                           coregnet = SC_GRN_1,
+                                           regulator_table = regulator_table,
+                                           aliases = aliases_SC )
+
+model_gene_KO_OV_constraints <- update_fluxes_constraints_geneKOOV(
+                                            model= iMM904,
+                                            gene_table =  gene_table,
+                                            aliases = aliases_SC)
+
+sol <- sybil::optimizeProb(model_TF_KO_OV_constraints)                                              
 ```
 
 ## From observations to fluxes
@@ -421,6 +399,44 @@ fluxes_interval_obs[get_biomass_flux_position(iMM904),]
 
 ```
 
+
+### Adjusting the fluxes bounds based on observed growth rates, and visualized its effects on metabolic genes 
+
+*During this step, you might get a message from R.cache to choose where the cached files should be saved. Since those files are only temporary files, you can create a 
+dedicated folder in your working directory which you can remove afterward, or pick a location near the installation folder of the R.cache package.*  
+
+```{r, message = FALSE, warnings = FALSE}
+
+FBA_bounds_from_growthrate<- get_fba_fluxes_from_observations(
+    model = iMM904,observed_growth_rate = 0.3,
+    metabolites_rates = metabolites_rates)
+
+FVA_bounds_from_growthrate<- get_fva_intervals_from_observations(
+    model = iMM904,observed_growth_rate = 0.3,
+    metabolites_rates = metabolites_rates)
+```
+
+```{r, message= FALSE, warning=FALSE}
+ODs<-seq.int(0.099,1.8,length.out = 5)
+times = seq(0.5,2,by=0.5)
+
+ODcurveToMetCurve<- ODCurveToMetabolicGeneCurves(times = times,
+                             ODs = ODs,
+                             model = iMM904,
+                             aliases = aliases_SC,
+                             metabolites_rates = metabolites_rates) 
+
+visMetabolicGeneCurves(ODcurveToMetCurve,genes = "YJR077C")
+
+ODtoflux<-ODCurveToFluxCurves(model = iMM904,
+                              ODs = ODs,
+                              times = times,
+                              metabolites_rates = metabolites_rates)
+
+visFluxCurves(ODtoflux, genes ="ADK3")
+```
+
+
 ## Calibration: identifying the softplus parameter using bayesian optimization
 
 To translate the gene expression to fluxes in the GEM, CoRegFlux use the softplus function 
@@ -464,7 +480,7 @@ result<-BayesianOptimization(FUN = opF,
 
 ```
 	
-### Session Info
+# Session Info
 
 ```{r}
 sessionInfo()
