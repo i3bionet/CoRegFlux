@@ -3,33 +3,32 @@ title: "CoRegFlux"
 author: "Pauline Trébulle, Daniel Trejo-Banos, Mohamed Elati"
 date: "December 2018"
 output:
-  rmarkdown::html_vignette: default
   pdf_document: default
+  rmarkdown::html_vignette: default
   html_document:
     toc: true
     toc_depth: 2
+    number_sections: true
 vignette: |
   %\VignetteIndexEntry{CoRegFlux} 
-  %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown} 
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#"
-)
+```{r setup, include = TRUE}
 
-data("iMM904")
+
 data("SC_GRN_1")
 data("SC_EXP_DATA")
 data("SC_experiment_influence")
 data("SC_Test_data")
 data("aliases_SC")
+data("iMM904")
 library(CoRegFlux)
 library(CoRegNet)
 library(sybil)
 library(latex2exp)
+
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
 
@@ -39,7 +38,9 @@ metabolites_rates<- data.frame("name"=c("D-Glucose"),
 
 model_uptake_constraints <- adjust_constraints_to_observed_rates(model = iMM904,
                             metabolites_with_rates = metabolites_rates)
-
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#")
 Testing_influence_matrix <- CoRegNet::regulatorInfluence(SC_GRN_1,SC_Test_data)
 experiment_influence<- Testing_influence_matrix[,1]
 
