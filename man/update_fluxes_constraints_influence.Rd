@@ -19,7 +19,7 @@ the CoRegNet object as string, its influence in the condition of interest as
 a numerical and an expression factor of 0 for a KO, or an integer >1 for an
  overexpression}
 
-\item{aliases}{Optional. A data.frame containing the gene names used in the
+\item{aliases}{Optional, a data.frame containing the gene names used in the
 metabolic model and the aliases to use to match the regulatory network}
 }
 \value{

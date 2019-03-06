@@ -23,10 +23,13 @@ their initial concentrations and their uptake rates. Columns must be named
 biomass reaction.}
 }
 \value{
-An object FluxCurves to visualize using the function `visFluxCurves`
+An object FluxCurves to visualize using the function
+\code{visFluxCurves}
 }
 \description{
-ODCurveToFluxCurves
+This function takes measured ODs and turn them into a FluxCurves object to be
+visualize using \code{visFluxCurves()}. It relies on flux variability analysis
+to highlight the flux value interval required to meet the specified OD.
 }
 \examples{
 ODs<-seq.int(0.099,1.8,length.out = 5)

@@ -4,12 +4,13 @@
 \name{PredictedGeneState}
 \alias{PredictedGeneState}
 \title{PredictedGeneState}
-\format{a named vector containing the gene name and its associated predicted gene state.}
+\format{a named vector containing the gene name and its associated predicted
+gene state.}
 \usage{
 PredictedGeneState
 }
 \description{
 Predicted gene states as obtained by the function
-`predict_linear_model_influence`
+\code{predict_linear_model_influence}
 }
 \keyword{datasets}

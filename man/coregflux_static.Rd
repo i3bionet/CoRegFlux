@@ -12,7 +12,7 @@ coregflux_static(model, predicted_gene_expression, gene_parameter = 0,
 
 \item{predicted_gene_expression}{The vector of predicted gene expression for
 the genes present in the metabolic model as given by
-predict_linear_model_influence}
+\code{predict_linear_model_influence()}}
 
 \item{gene_parameter}{Parameter of the softplus function}
 
@@ -33,7 +33,7 @@ constraints added}
  gene expression x}
 }
 \description{
-`coregflux_static` uses the gene states to update the fluxes bounds
+\code{coregflux_static()} uses the gene states to update the fluxes bounds
 from the metabolic model.
 }
 \examples{

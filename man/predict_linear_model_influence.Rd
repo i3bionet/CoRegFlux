@@ -12,10 +12,11 @@ predict_linear_model_influence(network, model,
 \arguments{
 \item{network}{a coregnet object}
 
-\item{model}{Optional if train_influence is provided.
-A genome-scale metabolic model from a class modelorg.}
+\item{model}{A genome-scale metabolic model from a class modelOrg.}
 
-\item{train_influence}{Optional is train_expression is provided.}
+\item{train_influence}{Optional, if is train_expression is provided.
+An influence matrix as computed by the function \code{regulatorInfluence()} from
+CoRegNet}
 
 \item{experiment_influence}{Regulator influence scores for the condition of
 interest as a named vector with the TF as names.}
@@ -28,9 +29,9 @@ corresponding to the gene expression. Rownames should contain gene names/ids
 \item{min_Target}{Optional. Use in case train_influence is not provided.
 Default value = 10. See regulatorInfluence for more information.}
 
-\item{tol}{Fluxes values below this threshold will be ignored.}
+\item{tol}{Fluxes values below this threshold will be ignored. Default}
 
-\item{aliases}{Optional. A two columns data.frame containing the name used in
+\item{aliases}{Optional, A two columns data.frame containing the name used in
 the gene regulatory network and their equivalent in the genome-scale
 metabolic model to allow the mapping of the GRN onto the GEM.
 The colnames should be geneName_model and geneName_GRN}

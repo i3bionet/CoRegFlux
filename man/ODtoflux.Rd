@@ -4,11 +4,11 @@
 \name{ODtoflux}
 \alias{ODtoflux}
 \title{ODtoflux}
-\format{List as obtained by the function `ODcurveToMetCurve`}
+\format{List as obtained by the function \code{ODCurveToFluxCurves}}
 \usage{
 ODtoflux
 }
 \description{
-List as obtained by the function `ODCurveToFluxCurves`
+List as obtained by the function \code{ODCurveToFluxCurves}
 }
 \keyword{datasets}

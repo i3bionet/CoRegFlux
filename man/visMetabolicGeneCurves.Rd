@@ -13,7 +13,7 @@ visMetabolicGeneCurves(metabCurves,
 \item{genes}{a vector containing the names of the metabolic genes to plot.
 Default select the first 50 genes}
 
-\item{...}{Optional others curves}
+\item{...}{Optional, others curves}
 }
 \value{
 a plot of the curves of the chosen metabolic genes

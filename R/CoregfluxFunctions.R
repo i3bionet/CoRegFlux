@@ -82,13 +82,13 @@ continuous_gpr <- function(model, expression, scale = FALSE) {
 
 #' Update the model using the provided gene regulatory network and expression
 #'
-#' `coregflux_static` uses the gene states to update the fluxes bounds
+#' \code{coregflux_static()} uses the gene states to update the fluxes bounds
 #' from the metabolic model.
 #'
 #' @param model A genome-scale metabolic model of class modelorg
 #' @param predicted_gene_expression The vector of predicted gene expression for
 #' the genes present in the metabolic model as given by
-#' `predict_linear_model_influence`
+#' \code{predict_linear_model_influence()}
 #' @param gene_parameter Parameter of the softplus function
 #' @param tol  Fluxes values below this threshold will be ignored.
 #' @param aliases a data.frame containing the gene names currently used in the
@@ -429,13 +429,14 @@ PrepareTrainDataInf<-function(network,
 #'  necessary if train_influence is supplied. Should be numerical matrix
 #'  corresponding to the gene expression. Rownames should contain gene names/ids
 #'   while samples should be in columns.
-#' @param tol Fluxes values below this threshold will be ignored.
-#' @param train_influence Optional is train_expression is provided.
-#' @param model Optional if train_influence is provided.
-#' A genome-scale metabolic model from a class modelorg.
+#' @param tol Fluxes values below this threshold will be ignored. Default
+#' @param train_influence Optional, if is train_expression is provided.
+#' An influence matrix as computed by the function \code{regulatorInfluence()} from
+#' CoRegNet
+#' @param model  A genome-scale metabolic model from a class modelOrg.
 #' @param min_Target Optional. Use in case train_influence is not provided.
 #' Default value = 10. See regulatorInfluence for more information.
-#' @param aliases Optional. A two columns data.frame containing the name used in
+#' @param aliases Optional, A two columns data.frame containing the name used in
 #' the gene regulatory network and their equivalent in the genome-scale
 #' metabolic model to allow the mapping of the GRN onto the GEM.
 #' The colnames should be geneName_model and geneName_GRN

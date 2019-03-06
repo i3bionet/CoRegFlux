@@ -18,7 +18,7 @@ metabolites, their concentrations and rates in mmol/gDW/h to adjust the model
 uptake rates. The column name must be "name", "concentrations","rates"}
 
 \item{biomass_flux_index}{Optional. Index of the biomass flux as returned by
-get_biomass_flux_position}
+\code{get_biomass_flux_position()}}
 }
 \value{
 Return the interval of fluxes values compatible with the observed

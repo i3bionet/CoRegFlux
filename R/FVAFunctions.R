@@ -5,7 +5,7 @@
 #' metabolites, their concentrations and rates in mmol/gDW/h to adjust the model
 #' uptake rates. The column name must be "name", "concentrations","rates"
 #' @param biomass_flux_index Optional. Index of the biomass flux as returned by
-#' get_biomass_flux_position
+#' \code{get_biomass_flux_position()}
 #' @return Return the interval of fluxes values compatible with the observed
 #' growth rate through flux variability analysis
 #'
@@ -47,7 +47,7 @@ get_fva_intervals_from_observations <- function(model,
 #' metabolites, their concentrations and rates in mmol/gDW/h to adjust the model
 #' uptake rates. The column name must be "name", "concentrations","rates"
 #' @param biomass_flux_index Optional. Index of the biomass flux as returned by
-#' get_biomass_flux_position
+#' \code{get_biomass_flux_position()}
 #' @param backward_fluxes Optional, only relevant for irreversible model
 #' @param forward_fluxes Optional, only relevant for irreversible model
 #' @return Return fluxes values compatible with the observed

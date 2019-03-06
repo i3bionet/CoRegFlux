@@ -117,7 +117,7 @@ update_uptake_fluxes_constraints_metabolites <- function(model,
 #' the CoRegNet object as string, its influence in the condition of interest as
 #' a numerical and an expression factor of 0 for a KO, or an integer >1 for an
 #'  overexpression
-#' @param aliases Optional. A data.frame containing the gene names used in the
+#' @param aliases Optional, a data.frame containing the gene names used in the
 #' metabolic model and the aliases to use to match the regulatory network
 #' @return Return the model with updated bounds
 #' @examples data("SC_GRN_1")

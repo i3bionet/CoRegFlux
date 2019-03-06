@@ -221,6 +221,9 @@ ODToFluxBounds <- function(odRate, model, metabolites_rates = NULL,
 }
 #' ODCurveToFluxCurves
 #'
+#'This function takes measured ODs and turn them into a FluxCurves object to be
+#'visualize using \code{visFluxCurves()}. It relies on flux variability analysis
+#' to highlight the flux value interval required to meet the specified OD.
 #' @param model An object of class modelOrg, the metabolic model.
 #' @param ODs A vector of measured ODs
 #' @param times A vector of timepoints at which the flux balance analysis
@@ -244,7 +247,8 @@ ODToFluxBounds <- function(odRate, model, metabolites_rates = NULL,
 #' @seealso  visFluxCurves, ODCurveToMetabolicGeneCurves,
 #' visMetabolicGeneCurves
 #' @export
-#' @return An object FluxCurves to visualize using the function `visFluxCurves`
+#' @return An object FluxCurves to visualize using the function
+#' \code{visFluxCurves}
 ODCurveToFluxCurves <- function(model, ODs,times, metabolites_rates = NULL,
                         biomass_flux_index = get_biomass_flux_position(model)){
 
@@ -333,6 +337,11 @@ logRates <- function(xs, ys){
 
 #' ODCurveToMetabolicGeneCurves
 #'
+#'This function takes measured ODs and turn them into a ODcurveToMetCurve object
+#'to be visualize using \code{visMetabolicGeneCurves()}. It relies on flux
+#'variability analysis to highlight the flux value interval required to meet the
+#' specified OD and to map it on the metabolic genes.
+#'
 #' @param times A vector of timepoints at which the flux balance analysis
 #' solution will be evaluated.
 #' @param ODs  vector of measured ODs.
@@ -353,7 +362,7 @@ logRates <- function(xs, ys){
 #' visMetabolicGeneCurves(ODcurveToMetCurve,genes="YJR077C")
 #' @export
 #' @return Metabolic genes curves to visualize using the function
-#' `visMetabolicGeneCurves`
+#' \code{visMetabolicGeneCurves}
 
 ODCurveToMetabolicGeneCurves <- function(times,
                                         ODs,

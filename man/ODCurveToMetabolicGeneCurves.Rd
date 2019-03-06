@@ -33,10 +33,13 @@ metabolic model and the aliases to use to match the regulatory network.}
 }
 \value{
 Metabolic genes curves to visualize using the function
-`visMetabolicGeneCurves`
+\code{visMetabolicGeneCurves}
 }
 \description{
-ODCurveToMetabolicGeneCurves
+This function takes measured ODs and turn them into a ODcurveToMetCurve object
+to be visualize using \code{visMetabolicGeneCurves()}. It relies on flux
+variability analysis to highlight the flux value interval required to meet the
+specified OD and to map it on the metabolic genes.
 }
 \examples{
 ODs<-c(0.4500000,0.5322392,0.6295079,0.7445529)

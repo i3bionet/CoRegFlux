@@ -41,6 +41,7 @@
 #' A matrix of S. cerevisiae gene expression during diauxic shift (Brauer and
 #' al.)
 #' @format a matrix of 6028 genes by 13 samples during diauxic shift
+#' @source E-GEOD-4398 (Brauer MJ and al.)
 "SC_Test_data"
 
 #' SC_experiment_influence
@@ -59,18 +60,19 @@
 #' PredictedGeneState
 #'
 #' Predicted gene states as obtained by the function
-#' `predict_linear_model_influence`
-#' @format a named vector containing the gene name and its associated predicted gene state.
+#' \code{predict_linear_model_influence}
+#' @format a named vector containing the gene name and its associated predicted
+#' gene state.
 "PredictedGeneState"
 
 #' ODcurveToMetCurve
 #'
-#' List as obtained by the function `ODcurveToMetCurve`
-#' @format List as obtained by the function `ODcurveToMetCurve`
+#' List as obtained by the function \code{ODCurveToMetabolicGeneCurves}
+#' @format List as obtained by the function \code{ODCurveToMetabolicGeneCurves}
 "ODcurveToMetCurve"
 
 #' ODtoflux
 #'
-#' List as obtained by the function `ODCurveToFluxCurves`
-#' @format List as obtained by the function `ODcurveToMetCurve`
+#' List as obtained by the function \code{ODCurveToFluxCurves}
+#' @format List as obtained by the function \code{ODCurveToFluxCurves}
 "ODtoflux"

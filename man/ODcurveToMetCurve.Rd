@@ -4,11 +4,11 @@
 \name{ODcurveToMetCurve}
 \alias{ODcurveToMetCurve}
 \title{ODcurveToMetCurve}
-\format{List as obtained by the function `ODcurveToMetCurve`}
+\format{List as obtained by the function \code{ODCurveToMetabolicGeneCurves}}
 \usage{
 ODcurveToMetCurve
 }
 \description{
-List as obtained by the function `ODcurveToMetCurve`
+List as obtained by the function \code{ODCurveToMetabolicGeneCurves}
 }
 \keyword{datasets}
