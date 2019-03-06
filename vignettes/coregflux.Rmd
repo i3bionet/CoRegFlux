@@ -5,6 +5,9 @@ date: "December 2018"
 output:
   rmarkdown::html_vignette: default
   pdf_document: default
+  html_document:
+    toc: true
+    toc_depth: 2
 vignette: |
   %\VignetteIndexEntry{CoRegFlux} 
   %\VignetteEngine{knitr::rmarkdown} 
@@ -49,26 +52,42 @@ PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
 ```
 This Vignette accompanies the CoRegFlux package. It can be used either to get some additional information about the methods or to get examples of the use of the functions. Feel free to ask any question to the package maintainer (coregflux at gmail dot com).
 
+\tableofcontents
 
 # Introduction 
 
-The CoRegFlux package aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working. 
+The CoRegFlux package aims at providing tools to integrate reverse engineered gene regulatory networks and gene-expression into metabolic models to improve prediction of phenotypes, both for metabolic engineering, through transcription factor or gene (TF) knock-out or overexpression in various conditions as well as to improve our understanding of the interactions and cell inner-working. The following figure summurize the different functions available in the package to constraint the genome-scale metabolic model with gene expression for wild-type or mutants or to run a complete simulation using those constraints.
 
 
 <img src="FigureWithFunctions.png" alt="Summary of CoRegFlux functions and features" width="650"/>
 
+# Installation
 
+Install:
+
+``` {r,warning = FALSE, eval = FALSE}
+if(!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("CoRegFlux")
+```
+
+Load:
+
+```{r,warning = FALSE, eval = FALSE}
+library(CoRegFlux)
+```
 
 # Data requirement 
 
 To use *all* CoRegFlux features you will need: 
 
-1. A genome-scale metabolic model for your model organism as a modelOrg object (see sybilSBML for import) 
+1. A genome-scale metabolic model for your model organism as a modelOrg object (see sybilSBML for import) containing gene-association rules for reactions
 2. Condition-specific gene expression data / gene states for which the transcription factor influence, a statistical value estimating the TF activity in each sample, will be calculated 
-3. A gene regulatory network as a coregnet objet (see the _CoRegNet_ package for more information about network inference) 
+3. A gene regulatory network (GRN) as a coregnet objet (see the _CoRegNet_ package for more information about network inference) 
 4. A large gene expression matrix to train the model
 
-
+Examples data are provided with the package, including  genome-scale metabolic model iMM904 for _Saccharomyces Cerevisiae_ (SC), a gene regulatory network build for SC from the m3D database as described in \cite{Trejo Banos et al., "Integrating transcriptional activity in genome-scale models of metabolism", BMC Systems Biology 2017}, as well as a subset of the m3D dataset to train the model and provide gene expression data. To study others organims or another regulatory network, you will need to build a GRN using the _CoRegNet_ package and/or choose
+relevant datasets. 
 
 # Quick user guide
 
@@ -307,6 +326,7 @@ Simulation1$fluxes_history[1:10,1:9]
 To have access to the gprRules users can use the sybil package, which returns a vector of size equal to the number of fluxes and the associated genes.
 
 ```{r}
+library(sybil)
 gpr(iMM904)[1:5]
 ```
 
@@ -433,10 +453,16 @@ opF<-function(p){
     }
 
 result<-BayesianOptimization(FUN = opF,
-                             bounds = list(p = c(10,10)),
-                             data.frame(p = seq(10,10,by =  0.5)),
+                             bounds = list(p = c(-10,10)),
+                             data.frame(p = seq(-10,10,by =  0.5)),
                              n_iter = 10, 
                              verbose = TRUE)
 
 ```
 	
+### Session Info
+
+```{r}
+sessionInfo()
+```
+
