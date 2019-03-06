@@ -50,7 +50,7 @@
 #' @format a named numerical vector
 "SC_experiment_influence"
 
-#' iMM904 data
+#' iMM904
 #'
 #' A _S. cerevisiae_ genome-scale metabolic model as a modelOrg object
 #' @format a modelOrg object as required by _sybil_. See _sybilSBML_ for more
