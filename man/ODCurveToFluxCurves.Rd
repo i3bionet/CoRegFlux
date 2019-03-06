@@ -32,6 +32,7 @@ visualize using \code{visFluxCurves()}. It relies on flux variability analysis
 to highlight the flux value interval required to meet the specified OD.
 }
 \examples{
+data(iMM904)
 ODs<-seq.int(0.099,1.8,length.out = 5)
 times = seq(0.5,2,by=0.5)
 

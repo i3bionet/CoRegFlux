@@ -73,6 +73,7 @@ data("SC_GRN_1")
 data("SC_EXP_DATA")
 data("SC_experiment_influence")
 data("iMM904")
+data("aliases_SC")
 data("PredictedGeneState")
 
 metabolites<-data.frame("name"=c("D-Glucose","Glycerol"),
@@ -93,7 +94,4 @@ result<-Simulation(iMM904,time=seq(1,10,by=1),
                    aliases = aliases_SC)
 
 result$biomass_history
-}
-\seealso{
-Simulation_Step
 }

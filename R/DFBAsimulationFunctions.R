@@ -619,12 +619,12 @@ Simulation_Step <- function(model, coregnet, metabolites,
 #' be provided while if the user wants to simulate a TF knock-out or
 #' overexpression, then a coregnet object and the regulator table should also be
 #'  provided. See the vignette and quick-user guide for more examples.
-#' @seealso Simulation_Step
 #' @examples
 #' data("SC_GRN_1")
 #' data("SC_EXP_DATA")
 #' data("SC_experiment_influence")
 #' data("iMM904")
+#' data("aliases_SC")
 #' data("PredictedGeneState")
 #'
 #' metabolites<-data.frame("name"=c("D-Glucose","Glycerol"),
