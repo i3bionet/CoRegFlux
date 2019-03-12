@@ -26,6 +26,7 @@ Suggests:
     plyr,
     igraph,
     methods,
-    latex2exp 
+    latex2exp,
+    rBayesianOptimization 
 biocViews:GeneRegulation,Network,SystemsBiology,GeneExpression,Transcription,GenePrediction
 VignetteBuilder: knitr
