@@ -482,7 +482,7 @@ GPRCurvesToMetabolicGeneCurves <- function(model,
 #' @seealso  ODCurveToMetabolicGeneCurves,ODCurveToFluxCurves, visFluxCurves
 #' @return a plot of the curves of the chosen metabolic genes
 visMetabolicGeneCurves <- function(metabCurves,
-                                  genes = unique(metabCurves$name)[1:50],...){
+                                  genes = unique(metabCurves$name)[seq_len(50)],...){
   otherCurves = list(...)
   allCurves = cbind(metabCurves, "context" = 1)
   if(length(otherCurves) > 0){
@@ -523,7 +523,7 @@ visMetabolicGeneCurves <- function(metabCurves,
 #' visMetabolicGeneCurves
 #' @return a plot of the curves of the chosen fluxes
 visFluxCurves <- function(fluxCurves,
-                          genes = unique(fluxCurves$name)[1:50],...){
+                          genes = unique(fluxCurves$name)[seq_len(50)],...){
     otherCurves = list(...)
     allCurves = cbind(fluxCurves, "context" = 1)
     if(length(otherCurves) > 0){

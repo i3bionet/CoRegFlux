@@ -144,7 +144,7 @@ coregflux_static <- function(model,
                                                   scale = FALSE)
     # we find the exchange reactions
     ex_idx <- sybil::react_pos(sybil::findExchReact(model))
-    not_ex <- setdiff(1:length(sybil::react_id(model)), ex_idx)
+    not_ex <- setdiff(seq_len(length(sybil::react_id(model))), ex_idx)
     # we find the reactions which lower bound was changed by the rules
     changed_idx_lower <- which(abs(sybil::lowbnd(expression_coregflux_bounds)) >
                                    tol)

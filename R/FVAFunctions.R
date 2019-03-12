@@ -33,7 +33,7 @@ get_fva_intervals_from_observations <- function(model,
 
     ts <- sybil::fluxVar(model)
 
-    matrix(data = cbind(ts@lp_obj[1:model@react_num],
+    matrix(data = cbind(ts@lp_obj[seq_len(model@react_num)],
                         ts@lp_obj[(1 + model@react_num):(model@react_num * 2)]),
            ncol = 2,
            dimnames = list(model@react_id, c("min", "max")))
