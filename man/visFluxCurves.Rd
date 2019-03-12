@@ -4,7 +4,8 @@
 \alias{visFluxCurves}
 \title{Visualize Fluxes Curves}
 \usage{
-visFluxCurves(fluxCurves, genes = unique(fluxCurves$name)[1:50], ...)
+visFluxCurves(fluxCurves, genes = unique(fluxCurves$name)[seq_len(50)],
+  ...)
 }
 \arguments{
 \item{fluxCurves}{result table from ODCurveToFluxCurves}

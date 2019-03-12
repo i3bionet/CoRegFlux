@@ -5,7 +5,7 @@
 \title{Visualize Metabolic Gene Curves}
 \usage{
 visMetabolicGeneCurves(metabCurves,
-  genes = unique(metabCurves$name)[1:50], ...)
+  genes = unique(metabCurves$name)[seq_len(50)], ...)
 }
 \arguments{
 \item{metabCurves}{result table from ODCurveToMetabolicGeneCurves}
