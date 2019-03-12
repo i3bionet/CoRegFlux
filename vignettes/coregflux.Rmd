@@ -468,7 +468,7 @@ where $\theta$ is the softplus parameter applied to all fluxes, $gpr_{i}\left(X\
  
 Given a known growth rate and predicted gene expressions obtained through the function predict_linear_model_influence, the users have the possibility to adjust the softplus parameter $\theta$ to calibrate the integration of the gene expression in the GEM. This step requires the installation of the package rBayesianOptimization.
 
-```{r, message =FALSE}
+```{r, message =FALSE, eval=FALSE}
 library(rBayesianOptimization)
 gRates <- 0.1
 
