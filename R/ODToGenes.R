@@ -62,24 +62,24 @@ parseSubs <- function(str){
 fluxBoundsToGPR <- function(fluxBounds, softplusParam){
 
   toGPR <- function(vals){
-    exps = exp(sapply(seq_along(vals), function(i){vals[i]}) - 1)
-    exps = sapply(exps, function(x){if(is.infinite(x)) .Machine$integer.max
+    exps = exp(vapply(seq_along(vals), function(i){vals[i]}) - 1)
+    exps = vapply(exps, function(x){if(is.infinite(x)) .Machine$integer.max
                                     else x})
     gprs = log(exps) - softplusParam
-    sapply(gprs, function(g){if(is.infinite(g) || is.na(g)) 0.001
+    vapply(gprs, function(g){if(is.infinite(g) || is.na(g)) 0.001
                             else max(g, 0.001)})
   }
 
   fluxBounds$absubound = abs(fluxBounds$ubound)
   fluxBounds$abslbound = abs(fluxBounds$lbound)
-  fluxBounds$minbound = sapply(seq_along(fluxBounds$abslbound), function(i){
+  fluxBounds$minbound = vapply(seq_along(fluxBounds$abslbound), function(i){
     #If bounds of different sign, then min is 0, since interval is bigger than
     # just abs value of max
     if(fluxBounds$ubound[i] != 0 &&
        (fluxBounds$lbound[i] / fluxBounds$ubound[i]) < 0) 0
     else min(fluxBounds$abslbound[i], fluxBounds$absubound[i])
   })
-  fluxBounds$maxbound = sapply(seq_along(fluxBounds$abslbound), function(i){
+  fluxBounds$maxbound = vapply(seq_along(fluxBounds$abslbound), function(i){
     max(fluxBounds$abslbound[i], fluxBounds$absubound[i])
   })
 
@@ -113,13 +113,13 @@ rulesToGraph <- function(minMaxRules){
 }
 
 setInitialBounds <- function(G, exprs, gprs){
-  igraph::V(G)$lbound = sapply(igraph::V(G)$name, function(n){
+  igraph::V(G)$lbound = vapply(igraph::V(G)$name, function(n){
     i = which(exprs == n)
     if(length(i) == 0) 0
     else min(gprs$lbound[i])
   })
 
-  igraph::V(G)$ubound = sapply(igraph::V(G)$name, function(n){
+  igraph::V(G)$ubound = vapply(igraph::V(G)$name, function(n){
     i = which(exprs == n)
     if(length(i) == 0) 1000
     else max(gprs$ubound[i])
@@ -145,7 +145,7 @@ propagateBoundsDown <- function(G){
     }
   }
 
-  igraph::V(G)$label = paste(sapply(igraph::V(G)$name, function(n){
+  igraph::V(G)$label = paste(vapply(igraph::V(G)$name, function(n){
     if(grepl("^min", n)) "m" else if(grepl("^sum", n)) "M" else ""
   }), paste(paste("[", paste(paste(igraph::V(G)$lbound, ";"),
                              igraph::V(G)$ubound)), "]"))
@@ -181,7 +181,7 @@ propagateBoundsUp <- function(G){
     }
   }
 
-  igraph::V(G)$label = paste(sapply(igraph::V(G)$name, function(n){
+  igraph::V(G)$label = paste(vapply(igraph::V(G)$name, function(n){
     if(grepl("^min", n)) "m" else if(grepl("^sum", n)) "M" else ""
   }), paste(paste("[", paste(paste(igraph::V(G)$lbound, ";"),
                              igraph::V(G)$ubound)), "]"))
@@ -306,7 +306,7 @@ ODToMetabolicGenes <- function(model, odRate, gprsGraph, exprs,
   }else{
       res = data.frame(
       name = igraph::V(G)$name,
-      commonName = sapply(igraph::V(G)$name, function(n){
+      commonName = vapply(igraph::V(G)$name, function(n){
           a = which(aliases$geneName_model == n)[1]
           aliases[a, "geneName_GRN"]
       }),
@@ -319,17 +319,17 @@ ODToMetabolicGenes <- function(model, odRate, gprsGraph, exprs,
 }
 
 relativeCurve <- function(xs, ys){
-  sapply(seq_along(xs), function(i){
+  vapply(seq_along(xs), function(i){
     max(1, ys[i]/ys[1])
   })
 }
 
 logRates <- function(xs, ys){
   logCurve = log(relativeCurve(xs, ys))
-  #sapply(seq_along(xs), function(i){
+  #vapply(seq_along(xs), function(i){
   #  log(max(1, ys[i]/ys[1]))
   #})
-  sapply(seq_along(logCurve), function(i){
+  vapply(seq_along(logCurve), function(i){
     if(i == 1) logCurve[1]
     else (logCurve[i] - logCurve[i - 1]) / (xs[i] - xs[i - 1])
   })
@@ -436,7 +436,7 @@ GPRToMetabolicGene <- function(gprs,
   }else{
       res = data.frame(
           name = igraph::V(G)$name,
-          commonName = sapply(igraph::V(G)$name, function(n){
+          commonName = vapply(igraph::V(G)$name, function(n){
               a = which(aliases$geneName_model == n)[1]
               aliases[a, "geneName_GRN"]
           }),
