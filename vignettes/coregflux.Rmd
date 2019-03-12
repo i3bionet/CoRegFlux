@@ -103,7 +103,7 @@ To use *all* CoRegFlux features you will need:
 3. A gene regulatory network (GRN) as a coregnet objet (see the _CoRegNet_ package for more information about network inference) 
 4. A large gene expression matrix to train the model
 
-Examples data are provided with the package, including  genome-scale metabolic model iMM904 for _Saccharomyces Cerevisiae_ (SC), a gene regulatory network build for SC from the m3D database as described in \cite{Trejo Banos et al., "Integrating transcriptional activity in genome-scale models of metabolism", BMC Systems Biology 2017}, as well as a subset of the m3D dataset to train the model and provide gene expression data. To study others organims or another regulatory network, you will need to build a GRN using the _CoRegNet_ package and/or choose
+Examples data are provided with the package, including  genome-scale metabolic model iMM904 for _Saccharomyces Cerevisiae_ (SC), a gene regulatory network build for SC from the m3D database as described in _Trejo Banos et al., "Integrating transcriptional activity in genome-scale models of metabolism", BMC Systems Biology 2017_, as well as a subset of the m3D dataset to train the model and provide gene expression data. To study others organims or another regulatory network, you will need to build a GRN using the _CoRegNet_ package and/or choose
 relevant datasets. 
 
 # User guide
@@ -123,6 +123,7 @@ Here are the main functionalities of _CoRegFlux_
 ## Predict gene state/gene expression level from a condition specific experiment using a linear model
 ```{r, warning= FALSE} 
 data("aliases_SC")
+data("iMM904")
 PredictedGeneState <- predict_linear_model_influence(network = SC_GRN_1,
                     experiment_influence = experiment_influence,
                     train_expression = SC_EXP_DATA,
@@ -169,6 +170,12 @@ The fluxes for the simulation time are stored in a matrix which row names are th
 
 
 ```{r}
+Simulation1<-Simulation(model = iMM904,
+                        time = seq(1,20,by = 1),
+                        metabolites = metabolites,
+                        initial_biomass = 0.45,
+                        aliases = aliases_SC)
+
 Simulation1$fluxes_history[1:10,1:5]
 ```
 
@@ -182,7 +189,7 @@ gpr(iMM904)[1:5]
 If you only wish to know which gene affects which reaction; the sybil objects have a slot for obtaining the flux-gene matrix. 
 
 ```{r}
-iMM904@rxnGeneMat[1:10,1:10]
+rxnGeneMat(iMM904)[1:10,1:10]
 ```
 
 ### Simulate a dFBA over time (here 20h) without constraint
@@ -321,7 +328,7 @@ SimulationGeneKO_OV$biomass_history ## This OV is predicted as non-lethal
 
 The different functions used by CoRegFlux to constraint the model are individually accessible to allow the combination of CoRegFlux's models with other algorithms and parameters, provided by sybil for instance. A model can be constrain iteratively through the different function. In that case, the recommended order is as follows: uptake constraint, gene expression, TF KO or OV, gene KO or OV.
 
-```{r,eval=FALSE,message =FALSE,warnings=FALSE}
+```{r,message =FALSE,warnings=FALSE}
 
 metabolites_rates <- data.frame("name"=c("D-Glucose"),
                                "concentrations"=c(16.6),
@@ -345,7 +352,9 @@ model_gene_KO_OV_constraints <- update_fluxes_constraints_geneKOOV(
                                             gene_table =  gene_table,
                                             aliases = aliases_SC)
 
-sol <- sybil::optimizeProb(model_TF_KO_OV_constraints)                                              
+sol <- sybil::optimizeProb(model_TF_KO_OV_constraints)   
+
+sol
 ```
 
 ## From observations to fluxes
@@ -459,7 +468,7 @@ where $\theta$ is the softplus parameter applied to all fluxes, $gpr_{i}\left(X\
  
 Given a known growth rate and predicted gene expressions obtained through the function predict_linear_model_influence, the users have the possibility to adjust the softplus parameter $\theta$ to calibrate the integration of the gene expression in the GEM. This step requires the installation of the package rBayesianOptimization.
 
-```{r, message =FALSE,eval=FALSE}
+```{r, message =FALSE}
 library(rBayesianOptimization)
 gRates <- 0.1
 
@@ -469,7 +478,7 @@ opF<-function(p){
                                           predicted_gene_expression = 
                                               PredictedGeneState)
         ts<-optimizeProb(CoRegFlux_model$model)
-        list(Score=-1*log(abs(ts@lp_obj-gRates)/gRates),Pred=0)
+        list(Score=-1*log(abs(lp_obj(ts)-gRates)/gRates),Pred=0)
     }
 
 result<-BayesianOptimization(FUN = opF,
