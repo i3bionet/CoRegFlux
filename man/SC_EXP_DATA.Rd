@@ -6,7 +6,7 @@
 \title{SC_EXP_DATA data}
 \format{a matrix of 3600 genes by 247 samples}
 \source{
-subset of m3d dataset available at < http://m3d.mssm.edu/ >
+subset of m3d dataset available at <http://m3d.mssm.edu/>
 }
 \usage{
 SC_EXP_DATA

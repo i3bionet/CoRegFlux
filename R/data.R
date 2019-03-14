@@ -33,7 +33,7 @@
 #' The dataset was shorten to 3600 genes in order to limit the size of the
 #' object
 #' @format a matrix of 3600 genes by 247 samples
-#' @source subset of m3d dataset available at < http://m3d.mssm.edu/ >
+#' @source subset of m3d dataset available at <http://m3d.mssm.edu/>
 "SC_EXP_DATA"
 
 #' SC_Test_data data

@@ -170,6 +170,11 @@ The fluxes for the simulation time are stored in a matrix which row names are th
 
 
 ```{r}
+data("aliases_SC")
+data("iMM904")
+metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
+                        "concentrations" = c(16.6,0))
+
 Simulation1<-Simulation(model = iMM904,
                         time = seq(1,20,by = 1),
                         metabolites = metabolites,
@@ -195,7 +200,6 @@ rxnGeneMat(iMM904)[1:10,1:10]
 ### Simulate a dFBA over time (here 20h) without constraint
 ```{r, warning = FALSE,message = FALSE}
 
-# 16.6 mmol ± =  3g/L Glucose
 metabolites<-data.frame("names" = c("D-Glucose","Ethanol"),
                         "concentrations" = c(16.6,0))
 
