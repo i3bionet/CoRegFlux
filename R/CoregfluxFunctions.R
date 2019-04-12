@@ -39,7 +39,7 @@ gpr_expression <- function(gpr, expression) {
         if (all(is.na(unlist(min_complex)))) {
             0
         } else {
-            sum(unlist(min_complex), na.rm = TRUE)
+            max(unlist(min_complex), na.rm = TRUE)
         }
     }))
     return(exp)
